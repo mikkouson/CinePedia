@@ -6,7 +6,7 @@ interface MovieContainerProps {
 
 const MovieContainer = ({ movies }: MovieContainerProps) => {
   return (
-    <div className="flex">
+    <div className="asd">
       {movies.map((movie) => (
         <Movie key={movie.id} movie={movie} />
       ))}
