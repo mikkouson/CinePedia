@@ -1,6 +1,9 @@
-import React from "react";
+interface MovieProps {
+  id: number;
+  title: string;
+}
 
-const Movie = ({ movie }) => {
+const Movie = ({ movie }: { movie: MovieProps }) => {
   return (
     <div>
       <div className="movie" key={movie.id}></div>

@@ -1,5 +1,10 @@
 import Movie from "./Movie";
-const MovieContainer = ({ movies }) => {
+
+interface MovieContainerProps {
+  movies: Array<{ id: number; title: string; director: string }>; // Example type for movie object
+}
+
+const MovieContainer = ({ movies }: MovieContainerProps) => {
   return (
     <div className="flex">
       {movies.map((movie) => (
