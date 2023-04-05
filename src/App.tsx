@@ -13,7 +13,7 @@ function App() {
     );
   }, []);
 
-  async function getMovies(url) {
+  async function getMovies(url: RequestInfo | URL) {
     const res = await fetch(url);
     const data = await res.json();
     setMovies(data.results);
