@@ -1,14 +1,31 @@
-import Movie from "./Movie";
+interface Movie {
+  id: number;
+  title: string;
+  // ... other movie properties
+}
+
+interface MovieProps {
+  movie: Movie;
+}
+
+const Movie = ({ movie }: MovieProps) => {
+  return (
+    <div>
+      <div className="movie" key={movie.id}></div>
+      <div className="title">{movie.title}</div>
+    </div>
+  );
+};
 
 interface MovieContainerProps {
-  movies: Array<{ id: number; title: string; director: string }>; // Example type for movie object
+  movies: Movie[];
 }
 
 const MovieContainer = ({ movies }: MovieContainerProps) => {
   return (
-    <div className="asd">
+    <div>
       {movies.map((movie) => (
-        <Movie key={movie.id} movie={movie} />
+        <Movie movie={movie} key={movie.id} />
       ))}
     </div>
   );
