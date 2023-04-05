@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
 import "./App.css";
 import Navigation from "./components/Layout/Navigation";
 import Home from "./pages/Home";
@@ -14,7 +13,7 @@ function App() {
     );
   }, []);
 
-  async function getMovies(url: RequestInfo | URL) {
+  async function getMovies(url) {
     const res = await fetch(url);
     const data = await res.json();
     setMovies(data.results);

@@ -1,14 +1,9 @@
 import Movie from "./Movie";
-
-interface MovieContainerProps {
-  movies: Array<{ id: number; title: string; director: string }>; // Example type for movie object
-}
-
-const MovieContainer = ({ movies }: MovieContainerProps) => {
+const MovieContainer = ({ movies }) => {
   return (
-    <div className="asd">
+    <div>
       {movies.map((movie) => (
-        <Movie key={movie.id} movie={movie} />
+        <Movie movie={movie} key={movie.id} />
       ))}
     </div>
   );
