@@ -8,6 +8,12 @@ const getmovies = async (url: RequestInfo | URL) => {
   return data.results;
 };
 
+const searchmovies = async (query: string) => {
+  const url = `https://api.themoviedb.org/3/search/movie?api_key=3fd2be6f0c70a2a598f084ddfb75487c&query=${query}`;
+  const results = await getmovies(url);
+  return results;
+};
+
 const useFetch = (query: string = "") => {
   const [movies, setMovies] = useState([]);
 
