@@ -1,27 +1,34 @@
 import React, { useState, Dispatch, SetStateAction } from "react";
 import { CiSearch } from "react-icons/ci";
-
+import { useNavigate } from "react-router-dom";
 interface Props {
   handleSearch: Dispatch<SetStateAction<string>>;
 }
 
-function Navigation({ handleSearch }: Props) {
+function Navigation() {
   const [query, setSearchMovie] = useState("");
+  const navigate = useNavigate();
 
   async function handleSubmit(e: { preventDefault: () => void }) {
     e.preventDefault();
     if (query && query !== "") {
-      handleSearch(
-        "https://api.themoviedb.org/3/search/movie?api_key=3fd2be6f0c70a2a598f084ddfb75487c&query=" +
-          query
-      );
+      navigate(`movies/${query}`);
     }
+  }
+
+  function handleHomeClick() {
+    navigate("/");
   }
 
   return (
     <nav className="flex h-16 px-8 justify-between items-center shadow-lg">
       <div className="w-full max-w-screen-2xl mx-auto flex items-center justify-between">
-        <h2 className="text-2xl font-mono">CinePedia</h2>
+        <h2
+          className="text-2xl font-mono cursor-pointer"
+          onClick={handleHomeClick}
+        >
+          CinePedia
+        </h2>
         <form onSubmit={handleSubmit}>
           <div className="relative">
             <input

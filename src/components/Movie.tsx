@@ -7,13 +7,14 @@ interface MovieProps {
   title: string;
 }
 
-const Movie = ({ movie }: { movie: MovieProps }) => {
+const Movie = ({ movie, handleOpenModal }: { movie: MovieProps }) => {
   return (
     <div className="flex flex-col shadow-2xl rounded-lg">
       <img
         className="w-full h-auto rounded-t-lg flex-1 cursor-pointer"
         src={"https://image.tmdb.org/t/p/w1280" + movie.poster_path}
         alt=""
+        onClick={() => handleOpenModal(movie)}
       />
       <div className="p-3">
         <div className="movie" key={movie.id}></div>
