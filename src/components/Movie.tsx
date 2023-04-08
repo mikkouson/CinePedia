@@ -1,20 +1,31 @@
 import { AiFillStar } from "react-icons/ai";
+import React from "react";
+
 interface MovieProps {
-  vote_average: number;
-  release_date: string;
-  poster_path: string;
-  id: number;
-  title: string;
+  movie: {
+    vote_average: number;
+    release_date: string;
+    poster_path: string;
+    id: number;
+    title: string;
+  };
+  handleOpenModal?: (movie: {
+    vote_average: number;
+    release_date: string;
+    poster_path: string;
+    id: number;
+    title: string;
+  }) => void;
 }
 
-const Movie = ({ movie, handleOpenModal }: { movie: MovieProps }) => {
+const Movie = ({ movie, handleOpenModal }: MovieProps) => {
   return (
     <div className="flex flex-col shadow-2xl rounded-lg">
       <img
         className="w-full h-auto rounded-t-lg flex-1 cursor-pointer"
         src={"https://image.tmdb.org/t/p/w1280" + movie.poster_path}
         alt=""
-        onClick={() => handleOpenModal(movie)}
+        onClick={() => handleOpenModal && handleOpenModal(movie)}
       />
       <div className="p-3">
         <div className="movie" key={movie.id}></div>
