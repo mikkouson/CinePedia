@@ -1,17 +1,18 @@
+// MovieContainer.tsx
 import Movie from "./Movie";
 
-interface Movie {
+export interface Movie {
   id: number;
   title: string;
   poster_path: string;
 }
 
-interface MovieProps extends Movie {
+export interface MovieProps extends Movie {
   vote_average: number;
   release_date: string;
 }
 
-type HandleOpenModal = (id: number) => void;
+type HandleOpenModal = (movie: MovieProps) => void;
 
 interface MovieContainerProps {
   movies: MovieProps[];
