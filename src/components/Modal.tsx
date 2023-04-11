@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 interface ModalProps {
   handleCloseModal: () => void;
   movie: {
-    [x: string]: string;
     title: string;
+    backdrop_path: string;
   };
 }
 

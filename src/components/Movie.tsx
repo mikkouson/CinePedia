@@ -8,6 +8,7 @@ interface MovieProps {
     poster_path: string;
     id: number;
     title: string;
+    backdrop_path: string; // Add backdrop_path property
   };
   handleOpenModal?: (movie: {
     vote_average: number;
@@ -15,6 +16,7 @@ interface MovieProps {
     poster_path: string;
     id: number;
     title: string;
+    backdrop_path: string;
   }) => void;
 }
 
