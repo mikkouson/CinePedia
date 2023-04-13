@@ -6,18 +6,15 @@ export interface Movie {
   title: string;
   poster_path: string;
   backdrop_path: string;
-}
-
-export interface MovieProps extends Movie {
   vote_average: number;
   release_date: string;
-  backdrop_path: string;
+  overview: string;
 }
 
-type HandleOpenModal = (movie: MovieProps) => void;
+type HandleOpenModal = (movie: Movie) => void;
 
 interface MovieContainerProps {
-  movies: MovieProps[];
+  movies: Movie[];
   handleOpenModal?: HandleOpenModal;
 }
 
