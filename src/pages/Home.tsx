@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Modal from "../components/Modal";
 import MovieContainer, { Movie } from "../components/MovieContainer";
-import { useFetch } from "../hooks/useFetch";
 
 interface HomeProps {
   movies: Movie[];

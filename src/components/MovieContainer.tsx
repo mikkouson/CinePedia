@@ -23,7 +23,11 @@ const MovieContainer = ({
   handleOpenModal = () => {},
 }: MovieContainerProps) => {
   if (movies.length === 0) {
-    return <p>No movies to show</p>;
+    return (
+      <p className="flex justify-around h-[100vh] items-center">
+        Movie Not Found
+      </p>
+    );
   }
 
   return (

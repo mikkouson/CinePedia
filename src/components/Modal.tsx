@@ -31,16 +31,16 @@ const Modal = ({ handleCloseModal, movie }: ModalProps) => {
       ></div>
       <div className="  md:w-auto   w-full">
         {/*modal card  */}
-        <div className=" mx-5 rounded-md shadow-lg shadow-[#ffffff44] relative flex  items-center bg-white z-50 ">
-          <div className="right-10 top-10 absolute">
+        <div className=" mx-5 rounded-md shadow-lg shadow-[#ffffff44] relative flex  items-center z-50 ">
+          <div className="right-10 top-10 absolute z-50 h-full">
             <MdOutlineClose
-              className="text-3xl text-[#ffffff] bg-[#212020] p-1 rounded-3xl cursor-pointer"
+              className="text-3xl text-[#ffffff] bg-[#212020] p-1 rounded-3xl cursor-pointer hover:bg-red-700"
               onClick={handleCloseModal}
             />
           </div>
 
           <div className="details absolute top-0 p-10 pr-10 sm:pr-0 sm:w-[50%] sm:p-10 w-full">
-            <h1 className="flex text-2xl text-gray-100 font-medium">
+            <h1 className="flex  text-gray-100 font-medium xs:text-2xl text-lg">
               {movie.title}
             </h1>
 
