@@ -1,6 +1,6 @@
 import { AiFillStar } from "react-icons/ai";
 import React from "react";
-
+import { Link } from "react-router-dom";
 interface MovieProps {
   movie: {
     vote_average: number;
@@ -34,7 +34,9 @@ const Movie = ({ movie, handleOpenModal }: MovieProps) => {
       <div className="p-3">
         <div className="movie" key={movie.id}></div>
         <div className=" text-gray-600  truncate font-bold hover:text-stone-900 cursor-pointer">
-          {movie.title}
+          <Link to={`/movie/${movie.id}`}>
+            <h4 className="Title">{movie.title}</h4>
+          </Link>
         </div>
         <div className="flex justify-between">
           {movie.release_date ? movie.release_date.slice(0, 4) : "Soon"}
