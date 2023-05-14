@@ -53,7 +53,7 @@ const Modal = ({ handleCloseModal, movie }: ModalProps) => {
             <h3 className=" h-25 line-clamp-6 font-normal text-[#dadadaca] ">
               {movie.overview}
             </h3>
-            <button className=" text-[#ffffff] bg-[#ffffff53] rounded-lg px-8 py-1 mt-3">
+            <button className=" text-[#ffffff] bg-[#ffffff53] rounded-lg px-8 py-1 mt-3  hover:bg-[#ffffff1f]">
               View More
             </button>
           </div>
