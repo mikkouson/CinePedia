@@ -1,6 +1,7 @@
 import { AiFillStar } from "react-icons/ai";
 import React from "react";
 import { Link } from "react-router-dom";
+
 interface MovieProps {
   movie: {
     vote_average: number;
@@ -8,7 +9,7 @@ interface MovieProps {
     poster_path: string;
     id: number;
     title: string;
-    backdrop_path: string; // Add backdrop_path property
+    backdrop_path: string;
     overview: string;
   };
   handleOpenModal?: (movie: {
@@ -33,7 +34,7 @@ const Movie = ({ movie, handleOpenModal }: MovieProps) => {
       />
       <div className="p-3">
         <div className="movie" key={movie.id}></div>
-        <div className=" text-gray-600  truncate font-bold hover:text-stone-900 cursor-pointer">
+        <div className="text-gray-600 truncate font-bold hover:text-stone-900 cursor-pointer">
           <Link to={`/movie/${movie.id}`}>
             <h4 className="Title">{movie.title}</h4>
           </Link>
@@ -41,7 +42,7 @@ const Movie = ({ movie, handleOpenModal }: MovieProps) => {
         <div className="flex justify-between">
           {movie.release_date ? movie.release_date.slice(0, 4) : "Soon"}
           <div className="flex">
-            <AiFillStar className="text-yellow-500  self-center mr-2" />
+            <AiFillStar className="text-yellow-500 self-center mr-2" />
             {movie.vote_average}
           </div>
         </div>
