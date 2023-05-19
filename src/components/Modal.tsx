@@ -1,10 +1,12 @@
 import React, { ReactNode, useEffect, useState } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { MdOutlineClose } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 interface ModalProps {
   handleCloseModal: () => void;
   movie: {
+    id: number;
     vote_average: ReactNode;
     overview: ReactNode;
     title: string;
@@ -53,9 +55,11 @@ const Modal = ({ handleCloseModal, movie }: ModalProps) => {
             <h3 className=" h-25 line-clamp-6 font-normal text-[#dadadaca] ">
               {movie.overview}
             </h3>
-            <button className=" text-[#ffffff] bg-[#ffffff53] rounded-lg px-8 py-1 mt-3  hover:bg-[#ffffff1f]">
-              View More
-            </button>
+            <Link to={`/movie/${movie.id}`}>
+              <button className=" text-[#ffffff] bg-[#ffffff53] rounded-lg px-8 py-1 mt-3  hover:bg-[#ffffff1f]">
+                View More
+              </button>
+            </Link>
           </div>
 
           <div className="rounded-md  bg-gradient-to-r from-black to-[#00000059] sm:to-transparent h-[26rem] w-[50rem]">
