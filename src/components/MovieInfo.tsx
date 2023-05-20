@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
+interface Genre {
+  id: number;
+  name: string;
+}
+
 interface MovieProps {
   vote_average: number;
   release_date: string;
@@ -9,12 +14,15 @@ interface MovieProps {
   title: string;
   backdrop_path: string;
   overview: string;
+  runtime: number;
+  original_language: string;
+  genres: Genre[];
 }
 
 const MovieInfo = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState<MovieProps | null>(null);
-  const [movieLogo, setMovieLogo] = useState<MovieProps | null>(null);
+  const [movieLogo, setMovieLogo] = useState<string | null>(null);
 
   useEffect(() => {
     async function getMovie() {
@@ -24,6 +32,7 @@ const MovieInfo = () => {
       const data = await res.json();
       setMovie(data);
     }
+
     async function getMovieLogo() {
       const res = await fetch(
         `https://api.themoviedb.org/3/movie/${id}/images?api_key=3fd2be6f0c70a2a598f084ddfb75487c`
@@ -36,26 +45,49 @@ const MovieInfo = () => {
     getMovieLogo();
   }, [id]);
 
+  function convertTime(time: number) {
+    const hours = Math.floor(time / 60);
+    const minutes = time % 60;
+    return `${hours}h ${minutes}m`;
+  }
+  console.log(movie);
   if (!movie) return <div>Not Found</div>;
 
   return (
-    <div>
+    <div className="text-white texl-xl">
       <div className="relative">
         <img
           src={"https://image.tmdb.org/t/p/w1280" + movie.backdrop_path}
-          className="w-full h-full object-cover"
+          className="w-full h-[100vh] object-cover"
           alt=""
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black to-[#00000059] "></div>
-        <div className="details absolute top-0 p-10 pr-10 sm:pr-0 sm:w-[50%] sm:p-10 w-full">
-          <img
-            src={"https://image.tmdb.org/t/p/w1280" + movieLogo}
-            className=" -z-50 x w-full h-[20rem]  bg-center"
-            alt=""
-          />
-          <p className=" flex flex-column  absolute  text-white">
-            {movie.overview}
-          </p>
+
+        <div className="w-full h-full details absolute top-0 flex items-center pl-10 pr-10">
+          <div className="w-[50%] flex flex-col">
+            <div className="w-[50%] ">
+              <img
+                src={"https://image.tmdb.org/t/p/w1280" + movieLogo}
+                className="z-[70] x w-full h-full  bg-center mb-10  min-w-[30rem]"
+                alt=""
+              />
+            </div>
+            <h1 className="text-white text-3xl font-medium mb-1">
+              {movie.title}
+            </h1>
+            <p className="text-lg  mb-5">
+              {movie.release_date.substr(0, 4)} |{" "}
+              {movie.genres.map((genre) => genre.name).join(", ")} |{" "}
+              {convertTime(movie.runtime)}
+            </p>
+
+            <p className="text-[#ffffffc4] font-normal text-lg">
+              {movie.overview}
+            </p>
+            <a href="">Watch Trailer</a>
+            <p className="text-[#ffffffc4] font-normal "></p>
+          </div>
+          <div className="w-[60%]"></div>
         </div>
       </div>
     </div>

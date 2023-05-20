@@ -21,10 +21,10 @@ function Navigation() {
   }
 
   return (
-    <nav className="flex h-16 px-8 justify-between items-center shadow-lg">
+    <nav className="absolute z-[100] flex w-full h-16 px-8  bg-transparent justify-between items-center shadow-lg">
       <div className="w-full max-w-screen-2xl mx-auto flex items-center justify-between">
         <h2
-          className="text-2xl font-mono cursor-pointer"
+          className="text-2xl font-mono cursor-pointer text-white"
           onClick={handleHomeClick}
         >
           CinePedia
@@ -32,7 +32,7 @@ function Navigation() {
         <form onSubmit={handleSubmit}>
           <div className="relative">
             <input
-              className=" w-48 text-1xl h-9 bg-gray-200 rounded-full p-2 px-5 outline-transparent"
+              className=" w-48 text-1xl h-9 text-[#ffffffd3] bg-gray-200 rounded-full p-2 px-5 bg-transparent border-white"
               type="text"
               placeholder=" Search..."
               value={query}
