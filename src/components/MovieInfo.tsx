@@ -20,17 +20,19 @@ interface MovieProps {
 }
 
 const MovieInfo = () => {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const [movie, setMovie] = useState<MovieProps | null>(null);
   const [movieLogo, setMovieLogo] = useState<string | null>(null);
+  const [trailer, setTrailer] = useState<string | null>(null);
 
   useEffect(() => {
     async function getMovie() {
       const res = await fetch(
-        `https://api.themoviedb.org/3/movie/${id}?api_key=3fd2be6f0c70a2a598f084ddfb75487c`
+        `https://api.themoviedb.org/3/movie/${id}?api_key=3fd2be6f0c70a2a598f084ddfb75487c&append_to_response=videos`
       );
       const data = await res.json();
       setMovie(data);
+      setTrailer(data.videos.results[0]?.key || null);
     }
 
     async function getMovieLogo() {
@@ -38,7 +40,7 @@ const MovieInfo = () => {
         `https://api.themoviedb.org/3/movie/${id}/images?api_key=3fd2be6f0c70a2a598f084ddfb75487c`
       );
       const data = await res.json();
-      setMovieLogo(data.logos[0].file_path);
+      setMovieLogo(data.logos[0]?.file_path || null);
     }
 
     getMovie();
@@ -50,7 +52,7 @@ const MovieInfo = () => {
     const minutes = time % 60;
     return `${hours}h ${minutes}m`;
   }
-  console.log(movie);
+
   if (!movie) return <div>Not Found</div>;
 
   return (
@@ -84,8 +86,19 @@ const MovieInfo = () => {
             <p className="text-[#ffffffc4] font-normal text-lg">
               {movie.overview}
             </p>
-            <a href="">Watch Trailer</a>
-            <p className="text-[#ffffffc4] font-normal "></p>
+            {trailer && (
+              <div className="mt-5">
+                <h2 className="text-lg text-white">Watch Trailer</h2>
+                <iframe
+                  width="560"
+                  height="315"
+                  src={`https://www.youtube.com/embed/${trailer}`}
+                  title="Trailer"
+                  frameBorder="0"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            )}
           </div>
           <div className="w-[60%]"></div>
         </div>
