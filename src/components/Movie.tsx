@@ -1,5 +1,4 @@
 import { AiFillStar } from "react-icons/ai";
-import React from "react";
 import { Link } from "react-router-dom";
 interface MovieProps {
   movie: {

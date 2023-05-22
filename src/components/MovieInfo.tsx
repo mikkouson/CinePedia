@@ -68,11 +68,13 @@ const MovieInfo = () => {
         <div className="w-full h-full details absolute top-0 flex items-center pl-10 pr-10">
           <div className="w-[50%] flex flex-col">
             <div className="w-[50%] ">
-              <img
-                src={"https://image.tmdb.org/t/p/w1280" + movieLogo}
-                className="z-[70] x w-full h-full  bg-center mb-10  min-w-[30rem]"
-                alt=""
-              />
+              {movieLogo && (
+                <img
+                  src={"https://image.tmdb.org/t/p/w1280" + movieLogo}
+                  className="z-[70] x w-full h-full  bg-center mb-10  min-w-[30rem]"
+                  alt=""
+                />
+              )}
             </div>
             <h1 className="text-white text-3xl font-medium mb-1">
               {movie.title}
@@ -94,7 +96,6 @@ const MovieInfo = () => {
                   height="315"
                   src={`https://www.youtube.com/embed/${trailer}`}
                   title="Trailer"
-                  frameBorder="0"
                   allowFullScreen
                 ></iframe>
               </div>
