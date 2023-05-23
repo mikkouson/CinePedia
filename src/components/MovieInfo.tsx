@@ -88,20 +88,22 @@ const MovieInfo = () => {
             <p className="text-[#ffffffc4] font-normal text-lg">
               {movie.overview}
             </p>
-            {trailer && (
-              <div className="mt-5">
-                <h2 className="text-lg text-white">Watch Trailer</h2>
-                <iframe
-                  width="560"
-                  height="315"
-                  src={`https://www.youtube.com/embed/${trailer}`}
-                  title="Trailer"
-                  allowFullScreen
-                ></iframe>
-              </div>
-            )}
           </div>
           <div className="w-[60%]"></div>
+        </div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          {trailer && (
+            <div className="mt-5">
+              <h2 className="text-lg text-white">Watch Trailer</h2>
+              <iframe
+                width="1000"
+                height="600"
+                src={`https://www.youtube.com/embed/${trailer}`}
+                title="Trailer"
+                allowFullScreen
+              ></iframe>
+            </div>
+          )}
         </div>
       </div>
     </div>
