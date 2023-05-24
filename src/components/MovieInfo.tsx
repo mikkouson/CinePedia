@@ -24,6 +24,7 @@ const MovieInfo = () => {
   const [movie, setMovie] = useState<MovieProps | null>(null);
   const [movieLogo, setMovieLogo] = useState<string | null>(null);
   const [trailer, setTrailer] = useState<string | null>(null);
+  const [showTrailer, setShowTrailer] = useState<boolean>(false);
 
   useEffect(() => {
     async function getMovie() {
@@ -88,23 +89,36 @@ const MovieInfo = () => {
             <p className="text-[#ffffffc4] font-normal text-lg">
               {movie.overview}
             </p>
+            <button
+              className="text-lg text-white cursor-pointer "
+              onClick={() => setShowTrailer(true)}
+            >
+              Watch Trailer
+            </button>
           </div>
           <div className="w-[60%]"></div>
         </div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          {trailer && (
-            <div className="mt-5">
-              <h2 className="text-lg text-white">Watch Trailer</h2>
-              <iframe
-                width="1000"
-                height="600"
-                src={`https://www.youtube.com/embed/${trailer}`}
-                title="Trailer"
-                allowFullScreen
-              ></iframe>
+        {showTrailer && trailer && (
+          <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 backdrop-filter backdrop-grayscale z-50">
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <div className="mt-5 ">
+                <button
+                  className="text-lg text-white cursor-pointer "
+                  onClick={() => setShowTrailer(false)}
+                >
+                  X
+                </button>
+                <iframe
+                  width="1000"
+                  height="600"
+                  src={`https://www.youtube.com/embed/${trailer}`}
+                  title="Trailer"
+                  allowFullScreen
+                ></iframe>
+              </div>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );
