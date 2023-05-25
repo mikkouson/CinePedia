@@ -33,7 +33,7 @@ const MovieInfo = () => {
       );
       const data = await res.json();
       setMovie(data);
-      setTrailer(data.videos.results[0]?.key || null);
+      setTrailer(data.videos.results[Math.random()]?.key || null);
     }
 
     async function getMovieLogo() {
