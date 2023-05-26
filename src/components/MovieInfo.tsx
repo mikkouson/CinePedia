@@ -33,7 +33,7 @@ const MovieInfo = () => {
       );
       const data = await res.json();
       setMovie(data);
-      setTrailer(data.videos.results[Math.random()]?.key || null);
+      setTrailer(data.videos.results[0]?.key || null);
     }
 
     async function getMovieLogo() {
@@ -72,7 +72,7 @@ const MovieInfo = () => {
               {movieLogo && (
                 <img
                   src={"https://image.tmdb.org/t/p/w1280" + movieLogo}
-                  className="z-[70] x w-full h-full  bg-center mb-10  min-w-[30rem]"
+                  className="z-[70] x w-full h-full max-h-[15rem] bg-center mb-10  min-w-[30rem]"
                   alt=""
                 />
               )}
@@ -89,12 +89,14 @@ const MovieInfo = () => {
             <p className="text-[#ffffffc4] font-normal text-lg">
               {movie.overview}
             </p>
-            <button
-              className="text-lg text-white cursor-pointer "
-              onClick={() => setShowTrailer(true)}
-            >
-              Watch Trailer
-            </button>
+            {trailer && (
+              <button
+                className="text-lg text-white cursor-pointer "
+                onClick={() => setShowTrailer(true)}
+              >
+                Watch RandomTrailer
+              </button>
+            )}
           </div>
           <div className="w-[60%]"></div>
         </div>

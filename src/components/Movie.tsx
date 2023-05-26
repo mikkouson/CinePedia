@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
 interface MovieProps {
@@ -22,12 +23,21 @@ interface MovieProps {
 }
 
 const Movie = ({ movie, handleOpenModal }: MovieProps) => {
+  const [isLoading, setisLoading] = useState(true);
+
+  const handleImageLoad = () => {
+    setisLoading(false);
+  };
   return (
     <div className="flex flex-col shadow-2xl rounded-lg">
+      {isLoading && (
+        <div className="w-full h-full bg-gray-200 animate-pulse rounded-t-lg" />
+      )}
       <img
         className="w-full h-auto rounded-t-lg flex-1 cursor-pointer"
         src={"https://image.tmdb.org/t/p/w1280" + movie.poster_path}
         alt=""
+        onLoad={handleImageLoad}
         onClick={() => handleOpenModal && handleOpenModal(movie)}
       />
       <div className="p-3">
