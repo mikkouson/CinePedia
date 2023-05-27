@@ -24,25 +24,15 @@ interface MovieProps {
 }
 
 const Movie = ({ movie, handleOpenModal }: MovieProps) => {
-  const [isLoading, setisLoading] = useState(true);
-
-  const handleImageLoad = () => {
-    setisLoading(false);
-  };
-
   return (
     <div className="flex flex-col shadow-2xl rounded-lg">
-      {isLoading ? (
-        <div className="w-full h-[24rem] bg-gray-300 animate-pulse rounded-t-lg" />
-      ) : (
-        <img
-          className="w-full h-auto rounded-t-lg flex-1 cursor-pointer"
-          src={"https://image.tmdb.org/t/p/w1280" + movie.poster_path}
-          alt=""
-          onLoad={handleImageLoad}
-          onClick={() => handleOpenModal && handleOpenModal(movie)}
-        />
-      )}
+      <img
+        className="w-full h-auto rounded-t-lg flex-1 cursor-pointer text-center "
+        src={"https://image.tmdb.org/t/p/w1280" + movie.poster_path}
+        alt="POSTER N/A"
+        onClick={() => handleOpenModal && handleOpenModal(movie)}
+      />
+
       <div className="p-3">
         <div className="movie" key={movie.id}></div>
         <div className="text-gray-600 truncate font-bold hover:text-stone-900 cursor-pointer">
