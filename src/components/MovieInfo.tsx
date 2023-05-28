@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
 
 interface Genre {
   id: number;
@@ -22,6 +27,7 @@ interface MovieProps {
   overview: string;
   runtime: number;
   original_language: string;
+  status: string;
   genres: Genre[];
   cast: Cast[];
 }
@@ -72,7 +78,6 @@ const MovieInfo = () => {
     return `${hours}h ${minutes}m`;
   }
   if (!movie) return <div>Not Found</div>;
-  console.log(cast);
   return (
     <div className="text-white texl-xl ">
       <div className="relative">
@@ -83,7 +88,7 @@ const MovieInfo = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black to-[#00000059] "></div>
 
-        <div className="w-full h-full details absolute top-0 flex items-center pl-10 pr-10">
+        <div className="w-full h-full details absolute top-0 flex items-center px-10">
           <div className="w-[50%] flex flex-col">
             <div className="w-[50%] ">
               {movieLogo && (
@@ -94,15 +99,25 @@ const MovieInfo = () => {
                 />
               )}
             </div>
-            <h1 className="text-white text-4xl font-medium mb-1">
+            <h1 className="text-white text-5xl font-medium mb-1">
               {movie.title}
             </h1>
             <p className="text-[#ffffffd0] text-lg  mb-5">
-              {movie.release_date.substr(0, 4)} |{" "}
-              {movie.genres.map((genre) => genre.name).join(", ")} |{" "}
+              {movie.release_date.substr(0, 4)} | {movie.status} |{" "}
               {convertTime(movie.runtime)}
             </p>
 
+            <h3 className="font-semibold text-[#ffffffd0]  text-xl ">Tags:</h3>
+            <div className="tags my-3">
+              {movie.genres.map((genre) => (
+                <a
+                  className="cursor-pointer  text-[#ffffff] bg-[#ffffff11] rounded-xl px-4 py-1 mr-2   hover:bg-[#ffffff1f]"
+                  key={genre.id}
+                >
+                  {genre.name}
+                </a>
+              ))}
+            </div>
             <p className="text-[#ffffffc4] font-normal text-lg">
               {movie.overview}
             </p>
@@ -142,23 +157,29 @@ const MovieInfo = () => {
           </div>
         )}
       </div>
-      <div className="Cast flex mt-3">
-        {cast.map((casts) => (
-          <div key={casts.id}>
-            <div className="castContainer text-black mr-2">
-              <div className="box w-36 h-44 ">
-                <img
-                  src={"https://image.tmdb.org/t/p/w1280" + casts.profile_path}
-                  className="w-full h-full object-cover  "
-                  alt=""
-                />
+      <div className="Cast my-5">
+        <Swiper spaceBetween={0} slidesPerView={12} grabCursor={true}>
+          {cast.map((casts) => (
+            <SwiperSlide key={casts.id}>
+              <div className="castContainer text-black mr-2">
+                <div className="box w-36 h-44 ">
+                  <img
+                    src={
+                      "https://image.tmdb.org/t/p/w1280" + casts.profile_path
+                    }
+                    className="w-full h-full object-cover rounded-xl "
+                    alt="Profile N/A"
+                  />
+                </div>
+                <div className="details font-normal whitespace-nowrap overflow-hidden text-ellipsis">
+                  <p className="font-semibold"> {casts.name}</p>
+                  <p>{casts.character}</p>
+                  <p>{casts.known_for_department}</p>
+                </div>
               </div>
-              <p> {casts.name}</p>
-              <p>{casts.character}</p>
-              <p>{casts.known_for_department}</p>
-            </div>
-          </div>
-        ))}
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </div>
   );
