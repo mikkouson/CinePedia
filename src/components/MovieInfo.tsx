@@ -10,6 +10,17 @@ interface Genre {
   id: number;
   name: string;
 }
+interface Backdrop {
+  id: number;
+  name: string;
+  file_path: string;
+}
+interface Logos {
+  id: number;
+  name: string;
+  file_path: string;
+}
+
 interface Cast {
   id: number;
   name: string;
@@ -17,29 +28,31 @@ interface Cast {
   character: string;
   known_for_department: string;
 }
+
 interface MovieProps {
   vote_average: number;
   release_date: string;
   poster_path: string;
+  backdrop_path: string;
   id: number;
   title: string;
-  backdrop_path: string;
   overview: string;
   runtime: number;
   original_language: string;
   status: string;
   genres: Genre[];
   cast: Cast[];
+  backdrop: Backdrop[];
 }
 
 const MovieInfo = () => {
   const { id } = useParams<{ id: string }>();
   const [movie, setMovie] = useState<MovieProps | null>(null);
-  const [movieLogo, setMovieLogo] = useState<string | null>(null);
+  const [movieLogo, setMovieLogo] = useState<Logos[]>([]);
   const [trailer, setTrailer] = useState<string | null>(null);
   const [showTrailer, setShowTrailer] = useState<boolean>(false);
   const [cast, setCast] = useState<Cast[]>([]);
-
+  const [backdrop, setBackdrop] = useState<Backdrop[]>([]);
   useEffect(() => {
     async function getMovie() {
       const res = await fetch(
@@ -50,16 +63,7 @@ const MovieInfo = () => {
       setTrailer(data.videos.results[0]?.key || null);
     }
 
-    async function getMovieLogo() {
-      const res = await fetch(
-        `https://api.themoviedb.org/3/movie/${id}/images?api_key=3fd2be6f0c70a2a598f084ddfb75487c`
-      );
-      const data = await res.json();
-      setMovieLogo(data.logos[0]?.file_path || null);
-    }
-
     getMovie();
-    getMovieLogo();
   }, [id]);
 
   useEffect(() => {
@@ -72,29 +76,56 @@ const MovieInfo = () => {
     }
     getCast();
   }, []);
+
+  useEffect(() => {
+    async function getBackdrop() {
+      const res = await fetch(
+        `https://api.themoviedb.org/3/movie/${id}/images?api_key=3fd2be6f0c70a2a598f084ddfb75487c`
+      );
+      const data = await res.json();
+      setBackdrop(
+        data.backdrops.map((backdrop: Backdrop) => backdrop.file_path)
+      );
+    }
+    getBackdrop();
+  }, [id]);
+
+  useEffect(() => {
+    async function getMovieLogo() {
+      const res = await fetch(
+        `https://api.themoviedb.org/3/movie/${id}/images?api_key=3fd2be6f0c70a2a598f084ddfb75487c`
+      );
+      const data = await res.json();
+      setMovieLogo(data.logos.map((logo: Logos) => logo.file_path));
+    }
+    getMovieLogo();
+  }, [id]);
+
   function convertTime(time: number) {
     const hours = Math.floor(time / 60);
     const minutes = time % 60;
     return `${hours}h ${minutes}m`;
   }
-  if (!movie) return <div>Not Found</div>;
-  return (
-    <div className="text-white texl-xl ">
-      <div className="relative">
-        <img
-          src={"https://image.tmdb.org/t/p/w1280" + movie.backdrop_path}
-          className="w-full h-[100vh] object-cover"
-          alt=""
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black to-[#00000059] "></div>
 
-        <div className="w-full h-full details absolute top-0 flex items-center px-10">
+  if (!movie) return <div>Not Found</div>;
+
+  return (
+    <main className="text-white ">
+      <img
+        src={"https://image.tmdb.org/t/p/w1280" + movie.backdrop_path}
+        className="relative w-full h-[92vh] object-cover"
+        alt=""
+      />
+      <header className="text-white texl-xl max-w-screen-2xl mx-auto">
+        <div className="absolute h-[92vh] inset-0 bg-gradient-to-r from-black to-[#00000059] "></div>
+
+        <div className="w-full h-full details absolute top-0 flex items-center">
           <div className="w-[50%] flex flex-col">
             <div className="w-[50%] ">
               {movieLogo && (
                 <img
-                  src={"https://image.tmdb.org/t/p/w1280" + movieLogo}
-                  className="z-[70] x w-full h-full max-h-[15rem] bg-center mb-10  min-w-[30rem]"
+                  src={"https://image.tmdb.org/t/p/w1280" + movieLogo[0]}
+                  className="z-[70] x w-full h-full max-h-[15rem] bg-center mb-10  "
                   alt=""
                 />
               )}
@@ -135,8 +166,32 @@ const MovieInfo = () => {
           </div>
           <div className="w-[60%]"></div>
         </div>
+        <div className="boxes absolute bottom-[1rem] ">
+          {
+            <Swiper
+              spaceBetween={0}
+              slidesPerView={8}
+              grabCursor={true}
+              style={{ width: "1536px" }}
+              resizeObserver={false}
+            >
+              <div className="  h-32 w-[200px] bg-transparent flex ">
+                {backdrop.map((backdrops, index) => (
+                  <SwiperSlide className="mr-4" key={index}>
+                    <img
+                      className="w-full h-full object-cover rounded-xl mr-10"
+                      src={"https://image.tmdb.org/t/p/w1280" + backdrops}
+                      alt=""
+                    />
+                  </SwiperSlide>
+                ))}
+              </div>
+            </Swiper>
+          }
+        </div>
+
         {showTrailer && trailer && (
-          <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 backdrop-filter backdrop-grayscale z-50">
+          <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center  bg-opacity-50 backdrop-filter backdrop-grayscale z-50">
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
               <div className="mt-5 ">
                 <button
@@ -156,32 +211,42 @@ const MovieInfo = () => {
             </div>
           </div>
         )}
-      </div>
-      <div className="Cast my-5">
-        <Swiper spaceBetween={0} slidesPerView={12} grabCursor={true}>
-          {cast.map((casts) => (
-            <SwiperSlide key={casts.id}>
-              <div className="castContainer text-black mr-2">
-                <div className="box w-36 h-44 ">
-                  <img
-                    src={
-                      "https://image.tmdb.org/t/p/w1280" + casts.profile_path
-                    }
-                    className="w-full h-full object-cover rounded-xl "
-                    alt="Profile N/A"
-                  />
+      </header>
+      <section className="movieDetails  max-w-screen-2xl mx-auto">
+        <h2 className="text-white text-3xl font-bold mt-16">Casts:</h2>
+        <div className="Cast my-5 w-full">
+          <Swiper
+            spaceBetween={0}
+            slidesPerView={9}
+            grabCursor={true}
+            style={{ width: "1536px" }}
+            resizeObserver={false}
+          >
+            {cast.map((casts) => (
+              <SwiperSlide key={casts.id}>
+                <div className="castContainer  mr-2">
+                  <div className="box w-36 h-44 ">
+                    <img
+                      src={
+                        "https://image.tmdb.org/t/p/w1280" + casts.profile_path
+                      }
+                      className="w-full h-full object-cover rounded-xl "
+                      alt="Profile N/A"
+                    />
+                  </div>
+                  <div className="details font-normal whitespace-nowrap overflow-hidden text-ellipsis">
+                    <p className="font-semibold"> {casts.name}</p>
+                    <p>{casts.character}</p>
+                    <p>{casts.known_for_department}</p>
+                  </div>
                 </div>
-                <div className="details font-normal whitespace-nowrap overflow-hidden text-ellipsis">
-                  <p className="font-semibold"> {casts.name}</p>
-                  <p>{casts.character}</p>
-                  <p>{casts.known_for_department}</p>
-                </div>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
-    </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </section>
+      <div></div>
+    </main>
   );
 };
 
