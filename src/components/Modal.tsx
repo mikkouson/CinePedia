@@ -63,11 +63,17 @@ const Modal = ({ handleCloseModal, movie }: ModalProps) => {
           </div>
 
           <div className="rounded-md  bg-gradient-to-r from-black to-[#00000059] sm:to-transparent h-[26rem] w-[50rem]">
-            <img
-              src={"https://image.tmdb.org/t/p/w1280" + movie.backdrop_path}
-              className=" absolute -z-50 top-70 w-full h-full object-cover bg-center rounded-lg"
-              alt=""
-            />
+            {movie.backdrop_path ? (
+              <img
+                src={"https://image.tmdb.org/t/p/w1280" + movie.backdrop_path}
+                className=" absolute -z-50 top-70 w-full h-full object-cover bg-center rounded-lg"
+              />
+            ) : (
+              <img
+                src="https://placehold.co/300x800/000000/000000f1?text=N/A"
+                className=" absolute -z-50 top-70 w-full h-full object-cover bg-center rounded-lg"
+              />
+            )}
           </div>
         </div>
       </div>

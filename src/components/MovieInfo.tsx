@@ -29,6 +29,14 @@ interface Cast {
   known_for_department: string;
 }
 
+interface Crew {
+  id: number;
+  name: string;
+  profile_path: string;
+  character: string;
+  known_for_department: string;
+  job: string;
+}
 interface MovieProps {
   vote_average: number;
   release_date: string;
@@ -53,6 +61,7 @@ const MovieInfo = () => {
   const [showTrailer, setShowTrailer] = useState<boolean>(false);
   const [cast, setCast] = useState<Cast[]>([]);
   const [backdrop, setBackdrop] = useState<Backdrop[]>([]);
+  const [director, setDirector] = useState<Crew[]>([]);
   useEffect(() => {
     async function getMovie() {
       const res = await fetch(
@@ -75,6 +84,19 @@ const MovieInfo = () => {
       setCast(data.cast || []);
     }
     getCast();
+  }, []);
+  useEffect(() => {
+    async function getDirector() {
+      const res = await fetch(
+        `https://api.themoviedb.org/3/movie/${id}/credits?api_key=3fd2be6f0c70a2a598f084ddfb75487c`
+      );
+      const data = await res.json();
+      const directors = data.crew.filter(
+        (crew: Crew) => crew.job === "Director" || crew.job === "Writer"
+      );
+      setDirector(directors);
+    }
+    getDirector();
   }, []);
 
   useEffect(() => {
@@ -109,20 +131,32 @@ const MovieInfo = () => {
 
   if (!movie) return <div>Not Found</div>;
 
+  console.log(movie);
   return (
-    <main className="text-white ">
-      <img
-        src={"https://image.tmdb.org/t/p/w1280" + movie.backdrop_path}
-        className="relative w-full h-[92vh] object-cover"
-        alt=""
-      />
+    <main className="text-white">
+      <div className="relative">
+        {movie.backdrop_path ? (
+          <img
+            src={"https://image.tmdb.org/t/p/w1280" + movie.backdrop_path}
+            className="w-full h-[92vh] object-cover"
+            alt=""
+          />
+        ) : (
+          <img
+            src="https://placehold.co/300x800/000000/000000f1?text=N/A"
+            className="w-full h-[92vh] object-cover"
+          />
+        )}
+
+        <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-b from-transparent to-[#0e0e0e] z-[40]"></div>
+      </div>
       <header className="text-white texl-xl max-w-screen-2xl mx-auto">
         <div className="absolute h-[92vh] inset-0 bg-gradient-to-r from-black to-[#00000059] "></div>
 
         <div className="w-full h-full details absolute top-0 flex items-center">
           <div className="w-[50%] flex flex-col">
             <div className="w-[50%] ">
-              {movieLogo && (
+              {movieLogo.length > 0 && (
                 <img
                   src={"https://image.tmdb.org/t/p/w1280" + movieLogo[0]}
                   className="z-[70] x w-full h-full max-h-[15rem] bg-center mb-10  "
@@ -166,7 +200,7 @@ const MovieInfo = () => {
           </div>
           <div className="w-[60%]"></div>
         </div>
-        <div className="boxes absolute bottom-[1rem] ">
+        <div className="boxes absolute bottom-[1rem]  z-[41] ">
           {
             <Swiper
               spaceBetween={0}
@@ -213,7 +247,7 @@ const MovieInfo = () => {
         )}
       </header>
       <section className="movieDetails  max-w-screen-2xl mx-auto">
-        <h2 className="text-white text-3xl font-bold mt-16">Casts:</h2>
+        <h2 className="text-white text-3xl font-bold mt-20">Casts:</h2>
         <div className="Cast my-5 w-full">
           <Swiper
             spaceBetween={0}
@@ -226,18 +260,29 @@ const MovieInfo = () => {
               <SwiperSlide key={casts.id}>
                 <div className="castContainer  mr-2">
                   <div className="box w-36 h-44 ">
-                    <img
-                      src={
-                        "https://image.tmdb.org/t/p/w1280" + casts.profile_path
-                      }
-                      className="w-full h-full object-cover rounded-xl "
-                      alt="Profile N/A"
-                    />
+                    {casts.profile_path ? (
+                      <img
+                        src={
+                          "https://image.tmdb.org/t/p/w1280" +
+                          casts.profile_path
+                        }
+                        className="w-full h-full object-cover rounded-xl "
+                        alt="Profile N/A"
+                      />
+                    ) : (
+                      <img
+                        src="https://placehold.co/250x400/000000/000000f1?text=N/A"
+                        className="w-full h-full object-cover rounded-xl "
+                        alt="Profile N/A"
+                      />
+                    )}
                   </div>
-                  <div className="details font-normal whitespace-nowrap overflow-hidden text-ellipsis">
+                  <div className="castDetails font-normal whitespace-nowrap overflow-hidden text-ellipsis mt-2">
                     <p className="font-semibold"> {casts.name}</p>
-                    <p>{casts.character}</p>
-                    <p>{casts.known_for_department}</p>
+                    <p className="text-[#ffffffc4]">{casts.character}</p>
+                    <p className="text-[#ffffffc4]">
+                      {casts.known_for_department}
+                    </p>
                   </div>
                 </div>
               </SwiperSlide>
@@ -245,6 +290,53 @@ const MovieInfo = () => {
           </Swiper>
         </div>
       </section>
+      <section className="movieDetails  max-w-screen-2xl mx-auto">
+        <h2 className="text-white text-3xl font-bold mt-6">
+          Directors / Writers:
+        </h2>
+        <div className="Cast my-5 w-full">
+          <Swiper
+            spaceBetween={0}
+            slidesPerView={9}
+            grabCursor={true}
+            style={{ width: "1536px" }}
+            resizeObserver={false}
+          >
+            {director.map((directors) => (
+              <SwiperSlide key={directors.id}>
+                <div className="castContainer  mr-2">
+                  <div className="box w-36 h-44 ">
+                    {directors.profile_path ? (
+                      <img
+                        src={
+                          "https://image.tmdb.org/t/p/w1280" +
+                          directors.profile_path
+                        }
+                        className="w-full h-full object-cover rounded-xl "
+                        alt="Profile N/A"
+                      />
+                    ) : (
+                      <img
+                        src="https://placehold.co/250x400/000000/000000f1?text=N/A"
+                        className="w-full h-full object-cover rounded-xl "
+                        alt="Profile N/A"
+                      />
+                    )}
+                  </div>
+                  <div className="castDetails font-normal whitespace-nowrap overflow-hidden text-ellipsis mt-2">
+                    <p className="font-semibold"> {directors.name}</p>
+                    <p className="text-[#ffffffc4]">{directors.character}</p>
+                    <p className="text-[#ffffffc4]">
+                      {directors.known_for_department}
+                    </p>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </section>
+
       <div></div>
     </main>
   );

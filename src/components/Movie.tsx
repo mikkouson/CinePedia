@@ -26,12 +26,21 @@ interface MovieProps {
 const Movie = ({ movie, handleOpenModal }: MovieProps) => {
   return (
     <div className="flex flex-col shadow-2xl rounded-lg">
-      <img
-        className="w-full h-auto rounded-t-lg flex-1 cursor-pointer text-center "
-        src={"https://image.tmdb.org/t/p/w1280" + movie.poster_path}
-        alt="POSTER N/A"
-        onClick={() => handleOpenModal && handleOpenModal(movie)}
-      />
+      {movie.poster_path ? (
+        <img
+          className="w-full h-auto rounded-t-lg flex-1 cursor-pointer text-center "
+          src={"https://image.tmdb.org/t/p/w1280" + movie.poster_path}
+          alt="POSTER N/A"
+          onClick={() => handleOpenModal && handleOpenModal(movie)}
+        />
+      ) : (
+        <img
+          className="w-full h-auto rounded-t-lg flex-1 cursor-pointer text-center "
+          src="https://placehold.co/250x400/000000/000000f1?text=N/A"
+          alt="POSTER N/A"
+          onClick={() => handleOpenModal && handleOpenModal(movie)}
+        />
+      )}
 
       <div className="p-3">
         <div className="movie" key={movie.id}></div>
