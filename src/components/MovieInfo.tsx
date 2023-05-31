@@ -70,6 +70,7 @@ interface MovieProps {
   cast: Cast[];
   backdrop: Backdrop[];
 }
+console.log("ad");
 
 const MovieInfo = () => {
   const { id } = useParams<{ id: string }>();
@@ -92,10 +93,6 @@ const MovieInfo = () => {
       setTrailer(data.videos.results[0]?.key || null);
     }
 
-    getMovie();
-  }, [id]);
-
-  useEffect(() => {
     async function getCast() {
       const res = await fetch(
         `https://api.themoviedb.org/3/movie/${id}/credits?api_key=3fd2be6f0c70a2a598f084ddfb75487c`
@@ -103,9 +100,7 @@ const MovieInfo = () => {
       const data = await res.json();
       setCast(data.cast || []);
     }
-    getCast();
-  }, []);
-  useEffect(() => {
+
     async function getDirector() {
       const res = await fetch(
         `https://api.themoviedb.org/3/movie/${id}/credits?api_key=3fd2be6f0c70a2a598f084ddfb75487c`
@@ -116,10 +111,7 @@ const MovieInfo = () => {
       );
       setDirector(directors);
     }
-    getDirector();
-  }, []);
 
-  useEffect(() => {
     async function getBackdrop() {
       const res = await fetch(
         `https://api.themoviedb.org/3/movie/${id}/images?api_key=3fd2be6f0c70a2a598f084ddfb75487c`
@@ -129,10 +121,7 @@ const MovieInfo = () => {
         data.backdrops.map((backdrop: Backdrop) => backdrop.file_path)
       );
     }
-    getBackdrop();
-  }, [id]);
 
-  useEffect(() => {
     async function getMovieLogo() {
       const res = await fetch(
         `https://api.themoviedb.org/3/movie/${id}/images?api_key=3fd2be6f0c70a2a598f084ddfb75487c`
@@ -140,10 +129,7 @@ const MovieInfo = () => {
       const data = await res.json();
       setMovieLogo(data.logos.map((logo: Logos) => logo.file_path));
     }
-    getMovieLogo();
-  }, [id]);
 
-  useEffect(() => {
     async function getCollection() {
       try {
         if (movie && movie.belongs_to_collection) {
@@ -159,9 +145,13 @@ const MovieInfo = () => {
     }
 
     getCollection();
+    getMovieLogo();
+    getBackdrop();
+    getDirector();
+    getCast();
+    getMovie();
   }, [movie, id]);
 
-  console.log(collection);
   function convertTime(time: number) {
     const hours = Math.floor(time / 60);
     const minutes = time % 60;
@@ -169,7 +159,9 @@ const MovieInfo = () => {
   }
 
   if (!movie) return <div>Not Found</div>;
+
   const posterUrl = `https://image.tmdb.org/t/p/w1280${collection?.backdrop_path}`;
+
   return (
     <main className="text-white">
       <div className="relative ">
@@ -397,7 +389,7 @@ const MovieInfo = () => {
               </p>
               <div className="collections parts mt-5 grid gap-2 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 md p-2">
                 {collection?.parts.map((parts) => (
-                  <div className="castContainer  mr-2 ">
+                  <div className="castContainer  mr-2 " key={parts?.id}>
                     <div className="box w-36 h-44 ">
                       <img
                         src={
