@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import Cast from "./MovieDetail/Cast";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -20,14 +20,6 @@ interface Logos {
   id: number;
   name: string;
   file_path: string;
-}
-
-interface Cast {
-  id: number;
-  name: string;
-  profile_path: string;
-  character: string;
-  known_for_department: string;
 }
 
 interface Parts {
@@ -67,10 +59,8 @@ interface MovieProps {
   status: string;
   belongs_to_collection: Collection;
   genres: Genre[];
-  cast: Cast[];
   backdrop: Backdrop[];
 }
-console.log("ad");
 
 const MovieInfo = () => {
   const { id } = useParams<{ id: string }>();
@@ -78,7 +68,6 @@ const MovieInfo = () => {
   const [movieLogo, setMovieLogo] = useState<Logos[]>([]);
   const [trailer, setTrailer] = useState<string | null>(null);
   const [showTrailer, setShowTrailer] = useState<boolean>(false);
-  const [cast, setCast] = useState<Cast[]>([]);
   const [backdrop, setBackdrop] = useState<Backdrop[]>([]);
   const [director, setDirector] = useState<Crew[]>([]);
   const [collection, setCollection] = useState<Collection | null>(null);
@@ -93,14 +82,10 @@ const MovieInfo = () => {
       setTrailer(data.videos.results[0]?.key || null);
     }
 
-    async function getCast() {
-      const res = await fetch(
-        `https://api.themoviedb.org/3/movie/${id}/credits?api_key=3fd2be6f0c70a2a598f084ddfb75487c`
-      );
-      const data = await res.json();
-      setCast(data.cast || []);
-    }
+    getMovie();
+  }, [id]);
 
+  useEffect(() => {
     async function getDirector() {
       const res = await fetch(
         `https://api.themoviedb.org/3/movie/${id}/credits?api_key=3fd2be6f0c70a2a598f084ddfb75487c`
@@ -111,7 +96,10 @@ const MovieInfo = () => {
       );
       setDirector(directors);
     }
+    getDirector();
+  }, [id]);
 
+  useEffect(() => {
     async function getBackdrop() {
       const res = await fetch(
         `https://api.themoviedb.org/3/movie/${id}/images?api_key=3fd2be6f0c70a2a598f084ddfb75487c`
@@ -121,7 +109,10 @@ const MovieInfo = () => {
         data.backdrops.map((backdrop: Backdrop) => backdrop.file_path)
       );
     }
+    getBackdrop();
+  }, [id]);
 
+  useEffect(() => {
     async function getMovieLogo() {
       const res = await fetch(
         `https://api.themoviedb.org/3/movie/${id}/images?api_key=3fd2be6f0c70a2a598f084ddfb75487c`
@@ -129,7 +120,10 @@ const MovieInfo = () => {
       const data = await res.json();
       setMovieLogo(data.logos.map((logo: Logos) => logo.file_path));
     }
+    getMovieLogo();
+  }, [id]);
 
+  useEffect(() => {
     async function getCollection() {
       try {
         if (movie && movie.belongs_to_collection) {
@@ -145,13 +139,9 @@ const MovieInfo = () => {
     }
 
     getCollection();
-    getMovieLogo();
-    getBackdrop();
-    getDirector();
-    getCast();
-    getMovie();
   }, [movie, id]);
 
+  console.log(collection);
   function convertTime(time: number) {
     const hours = Math.floor(time / 60);
     const minutes = time % 60;
@@ -159,9 +149,7 @@ const MovieInfo = () => {
   }
 
   if (!movie) return <div>Not Found</div>;
-
   const posterUrl = `https://image.tmdb.org/t/p/w1280${collection?.backdrop_path}`;
-
   return (
     <main className="text-white">
       <div className="relative ">
@@ -276,96 +264,8 @@ const MovieInfo = () => {
           </div>
         )}
       </header>
-      <section className="movieDetails  max-w-screen-2xl mx-auto">
-        <h2 className="text-white text-3xl font-bold mt-20">Casts:</h2>
-        <div className="Cast my-5 w-full">
-          <Swiper
-            spaceBetween={0}
-            slidesPerView={9}
-            grabCursor={true}
-            style={{ width: "1536px" }}
-            resizeObserver={false}
-          >
-            {cast.map((casts) => (
-              <SwiperSlide key={casts.id}>
-                <div className="castContainer  mr-2">
-                  <div className="box w-36 h-44 ">
-                    {casts.profile_path ? (
-                      <img
-                        src={
-                          "https://image.tmdb.org/t/p/w1280" +
-                          casts.profile_path
-                        }
-                        className="w-full h-full object-cover rounded-xl "
-                        alt="Profile N/A"
-                      />
-                    ) : (
-                      <img
-                        src="https://placehold.co/250x400/000000/000000f1?text=N/A"
-                        className="w-full h-full object-cover rounded-xl "
-                        alt="Profile N/A"
-                      />
-                    )}
-                  </div>
-                  <div className="castDetails font-normal whitespace-nowrap overflow-hidden text-ellipsis mt-2">
-                    <p className="font-semibold"> {casts.name}</p>
-                    <p className="text-[#ffffffc4]">{casts.character}</p>
-                    <p className="text-[#ffffffc4]">
-                      {casts.known_for_department}
-                    </p>
-                  </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-      </section>
-      <section className="movieDetails  max-w-screen-2xl mx-auto">
-        <h2 className="text-white text-3xl font-bold mt-6">
-          Directors / Writers:
-        </h2>
-        <div className="Cast my-5 w-full">
-          <Swiper
-            spaceBetween={0}
-            slidesPerView={9}
-            grabCursor={true}
-            style={{ width: "1536px" }}
-            resizeObserver={false}
-          >
-            {director.map((directors, index) => (
-              <SwiperSlide key={index}>
-                <div className="castContainer  mr-2">
-                  <div className="box w-36 h-44 ">
-                    {directors.profile_path ? (
-                      <img
-                        src={
-                          "https://image.tmdb.org/t/p/w1280" +
-                          directors.profile_path
-                        }
-                        className="w-full h-full object-cover rounded-xl "
-                        alt="Profile N/A"
-                      />
-                    ) : (
-                      <img
-                        src="https://placehold.co/250x400/000000/000000f1?text=N/A"
-                        className="w-full h-full object-cover rounded-xl "
-                        alt="Profile N/A"
-                      />
-                    )}
-                  </div>
-                  <div className="castDetails font-normal whitespace-nowrap overflow-hidden text-ellipsis mt-2">
-                    <p className="font-semibold"> {directors.name}</p>
-                    <p className="text-[#ffffffc4]">{directors.character}</p>
-                    <p className="text-[#ffffffc4]">
-                      {directors.known_for_department}
-                    </p>
-                  </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-      </section>
+      <Cast movieId={Number(id)} />
+
       {collection && (
         <section
           className="relative Collections bg-cover bg-fixed "
@@ -389,7 +289,7 @@ const MovieInfo = () => {
               </p>
               <div className="collections parts mt-5 grid gap-2 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 md p-2">
                 {collection?.parts.map((parts) => (
-                  <div className="castContainer  mr-2 " key={parts?.id}>
+                  <div className="castContainer  mr-2 " key={parts.id}>
                     <div className="box w-36 h-44 ">
                       <img
                         src={

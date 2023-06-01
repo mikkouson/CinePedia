@@ -32,6 +32,7 @@ const Movie = ({ movie, handleOpenModal }: MovieProps) => {
           src={"https://image.tmdb.org/t/p/w1280" + movie.poster_path}
           alt="POSTER N/A"
           onClick={() => handleOpenModal && handleOpenModal(movie)}
+          loading="lazy"
         />
       ) : (
         <img
@@ -39,6 +40,7 @@ const Movie = ({ movie, handleOpenModal }: MovieProps) => {
           src="https://placehold.co/250x400/000000/000000f1?text=N/A"
           alt="POSTER N/A"
           onClick={() => handleOpenModal && handleOpenModal(movie)}
+          loading="lazy"
         />
       )}
 
