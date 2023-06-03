@@ -7,7 +7,9 @@ const Trailer = ({ movieId }: { movieId: number }) => {
 
   useEffect(() => {
     const data = async () => {
-      setTrailer(await fetchTrailer(movieId));
+      if (trailer.length > 0) {
+        setTrailer(await fetchTrailer(movieId));
+      }
     };
     data();
   }, [movieId]);
@@ -22,7 +24,7 @@ const Trailer = ({ movieId }: { movieId: number }) => {
 
   return (
     <div>
-      {trailer && (
+      {trailer.length > 0 && (
         <span className="text-white inline-block mt-5">
           <a
             className="cursor-pointer  text-[#ffffff] bg-[#ffffff11] rounded-xl px-8 py-2   hover:bg-[#ffffff1f] z[50]"
@@ -32,12 +34,12 @@ const Trailer = ({ movieId }: { movieId: number }) => {
           </a>
         </span>
       )}
-      {showTrailer && trailer && (
-        <div className=" fixed top-0 left-0 w-full h-full flex items-center justify-center  bg-opacity-50 backdrop-filter backdrop-grayscale z-50">
+      {showTrailer && trailer.length > 0 && (
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-opacity-50 backdrop-filter backdrop-grayscale z-50">
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <div className="mt-5 ">
               <button
-                className="text-lg text-white cursor-pointer "
+                className="text-lg text-white cursor-pointer"
                 onClick={() => setShowTrailer(false)}
               >
                 X
@@ -45,7 +47,7 @@ const Trailer = ({ movieId }: { movieId: number }) => {
               <iframe
                 width="1000"
                 height="600"
-                src={`https://www.youtube.com/embed/${trailer}`}
+                src={`https://www.youtube.com/embed/${trailer[0]}`}
                 title="Trailer"
                 allowFullScreen
               ></iframe>

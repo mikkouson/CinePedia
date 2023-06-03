@@ -22,11 +22,13 @@ interface MovieProps {
   };
 }
 const Collection = ({ movie }: { movie: MovieProps }) => {
-  const [collection, setCollection] = useState<any>(null);
+  const [collection, setCollection] = useState<any>();
 
   useEffect(() => {
     const fetchData = async () => {
-      setCollection(await fetchCollection(movie.belongs_to_collection.id));
+      if (movie.belongs_to_collection) {
+        setCollection(await fetchCollection(movie.belongs_to_collection.id));
+      }
     };
     fetchData();
   }, [movie]);
