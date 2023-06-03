@@ -1,11 +1,7 @@
 import Backdrops from "./Backdrops";
 import Logo from "./Logo";
 import Trailer from "./Trailer";
-function convertTime(time: number) {
-  const hours = Math.floor(time / 60);
-  const minutes = time % 60;
-  return `${hours}h ${minutes}m`;
-}
+
 interface Genre {
   id: number;
   name: string;
@@ -24,10 +20,18 @@ interface MovieProps {
   status: string;
   genres: Genre[];
 }
+
+// convert time function
+function convertTime(time: number) {
+  const hours = Math.floor(time / 60);
+  const minutes = time % 60;
+  return `${hours}h ${minutes}m`;
+}
 const Header = ({ movieId, movie }: { movieId: number; movie: MovieProps }) => {
   return (
     <div>
       <div className="relative ">
+        {/* Header cover image using movie backdrop */}
         {movie.backdrop_path ? (
           <img
             src={"https://image.tmdb.org/t/p/w1280" + movie.backdrop_path}
@@ -45,9 +49,9 @@ const Header = ({ movieId, movie }: { movieId: number; movie: MovieProps }) => {
       </div>
       <header className="text-white texl-xl max-w-screen-2xl mx-auto">
         <div className="absolute h-[92vh] inset-0 bg-gradient-to-r from-black to-[#00000059] "></div>
-
         <div className="w-full h-full details absolute top-0 flex items-center">
           <div className="w-[50%] flex flex-col  z-[100]">
+            {/*  Movie logo image */}
             <Logo movieId={movieId} />
             <h1 className="text-white text-5xl font-medium mb-1">
               {movie.title}
@@ -56,7 +60,7 @@ const Header = ({ movieId, movie }: { movieId: number; movie: MovieProps }) => {
               {movie.release_date.substr(0, 4)} | {movie.status} |{" "}
               {convertTime(movie.runtime)}
             </p>
-
+            {/* Movie tags/genre */}
             <h3 className="font-semibold text-[#ffffffd0]  text-xl ">Tags:</h3>
             <div className="tags my-3">
               {movie.genres.map((genre) => (
@@ -71,11 +75,12 @@ const Header = ({ movieId, movie }: { movieId: number; movie: MovieProps }) => {
             <p className="text-[#ffffffc4] font-normal text-lg">
               {movie.overview}
             </p>
-
+            {/* Get movie Trailer */}
             <Trailer movieId={movieId} />
           </div>
           <div className="w-[60%]"></div>
         </div>
+        {/* Backdrops Slider */}
         <Backdrops movieId={movieId} />
       </header>
     </div>

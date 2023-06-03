@@ -4,6 +4,7 @@ import { fetchTrailer } from "../../api/api";
 const Trailer = ({ movieId }: { movieId: number }) => {
   const [trailer, setTrailer] = useState([]);
   const [showTrailer, setShowTrailer] = useState<boolean>(false);
+
   useEffect(() => {
     const data = async () => {
       setTrailer(await fetchTrailer(movieId));

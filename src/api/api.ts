@@ -22,6 +22,18 @@ export const fetchMovies = async () => {
   return data.results;
 };
 
+export const fetchsearch = async () => {
+  const response = await api.get(`/search/movie`);
+  const { data } = response;
+  return data.query;
+};
+
+export const fetchMovie = async (id: number) => {
+  const response = await api.get(`/movie/${id}`);
+  const { data } = response;
+  return data;
+};
+
 export const fetchMovieCredits = async (id: number) => {
   const response = await api.get(`/movie/${id}/credits`);
   const { data } = response;
@@ -49,4 +61,10 @@ export const fetchDirectors = async (id: number) => {
   const response = await api.get(`/movie/${id}/credits`);
   const { data } = response;
   return data.crew || [];
+};
+
+export const fetchCollection = async (id: number) => {
+  const response = await api.get(`/collection/${id}`);
+  const { data } = response;
+  return data;
 };

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { fetchBackdrop } from "../../api/api";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Swiper, SwiperSlide } from "swiper/react";
 interface Backdrop {
   id: number;
   name: string;

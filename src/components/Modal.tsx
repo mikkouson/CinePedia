@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { MdOutlineClose } from "react-icons/md";
 import { Link } from "react-router-dom";

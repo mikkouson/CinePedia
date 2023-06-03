@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import "swiper/css";
-import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { fetchMovieCredits } from "../../api/api";
+import "swiper/css";
+import "swiper/css/navigation";
 
 const Cast = ({ movieId }: { movieId: number }) => {
   interface Cast {
@@ -20,7 +20,7 @@ const Cast = ({ movieId }: { movieId: number }) => {
       setCast(await fetchMovieCredits(movieId));
     };
     data();
-  }, []);
+  }, [movieId]);
 
   return (
     <>

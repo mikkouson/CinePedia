@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { fetchsearch } from "../api/api";
 interface Props {
   handleSearch: (url: string) => Promise<void>;
 }
@@ -8,10 +9,7 @@ const useSearch = ({ handleSearch }: Props) => {
   async function handleSubmit(e: { preventDefault: () => void }) {
     e.preventDefault();
     if (query && query !== "") {
-      await handleSearch(
-        "https://api.themoviedb.org/3/search/movie?api_key=3fd2be6f0c70a2a598f084ddfb75487c&query=" +
-          query
-      );
+      await handleSearch(fetchsearch + query);
     }
   }
   return query;

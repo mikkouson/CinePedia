@@ -3,15 +3,15 @@ import { useEffect, useState } from "react";
 import { fetchDirectors } from "../../api/api";
 import "swiper/css";
 import "swiper/css/navigation";
+interface Crew {
+  id: number;
+  name: string;
+  profile_path: string;
+  character: string;
+  known_for_department: string;
+  job: string;
+}
 const Directors = ({ movieId }: { movieId: number }) => {
-  interface Crew {
-    id: number;
-    name: string;
-    profile_path: string;
-    character: string;
-    known_for_department: string;
-    job: string;
-  }
   const [director, setDirector] = useState<Crew[]>([]);
 
   useEffect(() => {
@@ -25,6 +25,7 @@ const Directors = ({ movieId }: { movieId: number }) => {
     };
     data();
   }, [movieId]);
+
   return (
     <section className="movieDetails  max-w-screen-2xl mx-auto">
       <h2 className="text-white text-3xl font-bold mt-6">
