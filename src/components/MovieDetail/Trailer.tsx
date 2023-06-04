@@ -7,7 +7,7 @@ const Trailer = ({ movieId }: { movieId: number }) => {
 
   useEffect(() => {
     const data = async () => {
-      if (trailer.length > 0) {
+      if (trailer) {
         setTrailer(await fetchTrailer(movieId));
       }
     };
@@ -24,7 +24,7 @@ const Trailer = ({ movieId }: { movieId: number }) => {
 
   return (
     <div>
-      {trailer.length > 0 && (
+      {trailer && trailer.length > 0 && (
         <span className="text-white inline-block mt-5">
           <a
             className="cursor-pointer  text-[#ffffff] bg-[#ffffff11] rounded-xl px-8 py-2   hover:bg-[#ffffff1f] z[50]"
@@ -47,7 +47,7 @@ const Trailer = ({ movieId }: { movieId: number }) => {
               <iframe
                 width="1000"
                 height="600"
-                src={`https://www.youtube.com/embed/${trailer[0]}`}
+                src={`https://www.youtube.com/embed/${trailer}`}
                 title="Trailer"
                 allowFullScreen
               ></iframe>

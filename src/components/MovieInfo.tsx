@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchMovie } from "../api/api";
-import Collection from "./MovieDetail/Collection";
-import Directors from "./MovieDetail/Directors";
-import Cast from "./MovieDetail/Cast";
-import Header from "./MovieDetail/Header";
+import Similar from "./MovieDetail/Similar";
+import Recommendation from "./MovieDetail/Recommendation";
+
+const Cast = lazy(() => import("./MovieDetail/Cast"));
+const Directors = lazy(() => import("./MovieDetail/Directors"));
+const Collection = lazy(() => import("./MovieDetail/Collection"));
+const Header = lazy(() => import("./MovieDetail/Header"));
 
 const MovieInfo = () => {
   const { id } = useParams();
@@ -21,10 +24,14 @@ const MovieInfo = () => {
 
   return (
     <main className="text-white">
-      <Header movieId={Number(id)} movie={movie} />
-      <Cast movieId={Number(id)} />
-      <Directors movieId={Number(id)} />
-      <Collection movie={movie} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Header movieId={Number(id)} movie={movie} />
+        <Cast movieId={Number(id)} />
+        <Directors movieId={Number(id)} />
+        <Collection movie={movie} />
+        <Similar movieId={Number(id)} />
+        <Recommendation movieId={Number(id)} />
+      </Suspense>
     </main>
   );
 };

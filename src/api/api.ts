@@ -46,11 +46,12 @@ export const fetchLogo = async (id: number) => {
   return data.logos || [];
 };
 
-export const fetchTrailer =async (id:number) => {
-  const response = await api.get(`/movie/${id}/videos`)
-  const {data} = response
-  return data.results[0].key 
-}
+export const fetchTrailer = async (id: number) => {
+  const response = await api.get(`/movie/${id}/videos`);
+  const { data } = response;
+  return data.results.length > 0 ? data.results[0].key : [];
+};
+
 
 export const fetchBackdrop = async (id: number) => {
   const response = await api.get(`/movie/${id}/images`);
@@ -67,4 +68,15 @@ export const fetchCollection = async (id: number) => {
   const response = await api.get(`/collection/${id}`);
   const { data } = response;
   return data;
+};
+
+export const fetchSimilar = async (id: number) => {
+  const response = await api.get(`/movie/${id}/similar`);
+  const { data } = response;
+  return data || [];
+};
+export const fetchRecommendation = async (id: number) => {
+  const response = await api.get(`/movie/${id}/recommendations`);
+  const { data } = response;
+  return data || [];
 };
