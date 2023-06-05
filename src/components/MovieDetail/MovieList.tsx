@@ -17,6 +17,29 @@ const MovieList = ({ movies }: { movies: MovieProps[] }) => {
       slidesPerView={9}
       grabCursor={true}
       resizeObserver={false}
+      breakpoints={{
+        320: {
+          slidesPerView: 2,
+        },
+        480: {
+          slidesPerView: 3,
+        },
+        640: {
+          slidesPerView: 4,
+        },
+        768: {
+          slidesPerView: 5,
+        },
+        1024: {
+          slidesPerView: 6,
+        },
+        1280: {
+          slidesPerView: 7,
+        },
+        1440: {
+          slidesPerView: 8,
+        },
+      }}
       className="max-w-screen-2xl mx-auto"
     >
       {movies &&

@@ -21,7 +21,7 @@ function Navigation() {
   }
 
   return (
-    <nav className="absolute z-[100] flex w-full h-16 px-8  bg-transparent justify-between items-center shadow-lg">
+    <nav className="absolute z-[110] flex w-full h-16 px-8  bg-transparent justify-between items-center shadow-lg">
       <div className="w-full max-w-screen-2xl mx-auto flex items-center justify-between">
         <h2
           className="text-2xl font-mono cursor-pointer text-white"

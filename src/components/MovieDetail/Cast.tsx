@@ -25,7 +25,7 @@ const Cast = ({ movieId }: { movieId: number }) => {
   return (
     <>
       {cast && cast.length > 0 && (
-        <section className="relative movieDetails  max-w-screen-2xl mx-auto">
+        <section className="px-10 2xl:px-0 relative movieDetails  max-w-screen-2xl mx-auto ">
           <div className="absolute w-10 h-full right-0 bg-gradient-to-r from-transparent to-[#0e0e0e] z-[100]"></div>
           <h2 className="text-white text-3xl font-bold mt-20">Casts:</h2>
           <div className="Cast my-5 w-full">
@@ -34,6 +34,29 @@ const Cast = ({ movieId }: { movieId: number }) => {
               slidesPerView={9}
               grabCursor={true}
               resizeObserver={false}
+              breakpoints={{
+                0: {
+                  slidesPerView: 2,
+                },
+                480: {
+                  slidesPerView: 3,
+                },
+                640: {
+                  slidesPerView: 4,
+                },
+                768: {
+                  slidesPerView: 5,
+                },
+                1024: {
+                  slidesPerView: 6,
+                },
+                1280: {
+                  slidesPerView: 7,
+                },
+                1440: {
+                  slidesPerView: 8,
+                },
+              }}
               className="w-full"
             >
               {cast.map((casts) => (

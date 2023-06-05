@@ -28,62 +28,52 @@ function convertTime(time: number) {
   return `${hours}h ${minutes}m`;
 }
 const Header = ({ movieId, movie }: { movieId: number; movie: MovieProps }) => {
-  return (
-    <div>
-      <div className="relative ">
-        {/* Header cover image using movie backdrop */}
-        {movie.backdrop_path ? (
-          <img
-            src={"https://image.tmdb.org/t/p/w1280" + movie.backdrop_path}
-            className="w-full h-[92vh] object-cover"
-            alt=""
-          />
-        ) : (
-          <img
-            src="https://placehold.co/300x800/000000/000000f1?text=N/A"
-            className="w-full h-[92vh] object-cover"
-          />
-        )}
+  const posterUrl = `https://image.tmdb.org/t/p/w1280${movie?.backdrop_path}`;
 
-        <div className="absolute bottom-0 h-60 inset-x-0  bg-gradient-to-b from-transparent to-[#0e0e0e] z-[40]"></div>
-      </div>
-      <header className="text-white texl-xl max-w-screen-2xl mx-auto">
-        <div className="absolute h-[92vh] inset-0 bg-gradient-to-r from-black to-[#00000059] "></div>
-        <div className="w-full h-full details absolute top-0 flex items-center">
-          <div className="w-[50%] flex flex-col  z-[100]">
-            {/*  Movie logo image */}
+  return (
+    <>
+      <header
+        className="relative w-full h-full bg-cover bg-no-repeat bg-center flex flex-col"
+        style={{ backgroundImage: `url(${posterUrl})` }}
+      >
+        <div className="absolute w-full h-full inset-0 bg-gradient-to-r from-black to-[#00000059]  "></div>
+
+        <div className="flex Container max-w-screen-2xl mx-auto z-[101] ">
+          <div className="w-full sm:w-1/2  py-16">
+            {/* Movie logo image */}
             <Logo movieId={movieId} />
-            <h1 className="text-white text-5xl font-medium mb-1">
+            <h1 className="text-4xl lg:text-5xl text-white font-medium mb-1">
               {movie.title}
             </h1>
-            <p className="text-[#ffffffd0] text-lg  mb-5">
-              {movie.release_date.substr(0, 4)} | {movie.status} |{" "}
-              {convertTime(movie.runtime)}
-            </p>
-            {/* Movie tags/genre */}
-            <h3 className="font-semibold text-[#ffffffd0]  text-xl ">Tags:</h3>
-            <div className="tags my-3">
-              {movie.genres.map((genre) => (
-                <a
-                  className="cursor-pointer  text-[#ffffff] bg-[#ffffff11] rounded-xl px-4 py-1 mr-2   hover:bg-[#ffffff1f]"
-                  key={genre.id}
-                >
-                  {genre.name}
-                </a>
-              ))}
+            <div className="text-sm lg:text-lg">
+              <p className="text-[#ffffffd0] text-lg mb-5">
+                {movie.release_date.substr(0, 4)} | {movie.status} |{" "}
+                {convertTime(movie.runtime)}
+              </p>
+              {/* Movie tags/genre */}
+              <h3 className="font-semibold text-[#ffffffd0] text-xl">Tags:</h3>
+              <div className="tags my-3">
+                {movie.genres.map((genre) => (
+                  <a
+                    className="cursor-pointer text-[#ffffff] bg-[#ffffff11] rounded-xl px-4 py-1 mr-2 hover:bg-[#ffffff1f]"
+                    key={genre.id}
+                  >
+                    {genre.name}
+                  </a>
+                ))}
+              </div>
+              <p className="text-[.9rem] lg:text-lg text-[#ffffffc4] font-normal">
+                {movie.overview}
+              </p>
+              {/* Get movie Trailer */}
+              <Trailer movieId={movieId} />
             </div>
-            <p className="text-[#ffffffc4] font-normal text-lg">
-              {movie.overview}
-            </p>
-            {/* Get movie Trailer */}
-            <Trailer movieId={movieId} />
           </div>
-          <div className="w-[60%]"></div>
         </div>
-        {/* Backdrops Slider */}
         <Backdrops movieId={movieId} />
+        <div className="absolute bottom-[0rem] h-[30rem] bg-gradient-to-b from-transparent to-[#0e0e0e] w-full z-[100]"></div>
       </header>
-    </div>
+    </>
   );
 };
 
