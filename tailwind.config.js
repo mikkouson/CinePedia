@@ -9,6 +9,8 @@ export default {
     extend: {
       screens: {
         'xs': '430px',
+        '2xs': '600px',
+        '1lg': '950px',
       }
     },
   },

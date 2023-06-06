@@ -54,6 +54,7 @@ const MovieList = ({ movies }: { movies: MovieProps[] }) => {
                     }
                     className="w-full h-full object-cover rounded-xl"
                     alt="Profile N/A"
+                    loading="lazy"
                   />
                 ) : (
                   <img

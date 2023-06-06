@@ -26,12 +26,12 @@ const Logo = ({ movieId }: { movieId: number }) => {
 
   return (
     <div>
-      <div className="w-[50%] ">
+      <div className="w-full h-full">
         {englishLogo && (
           <img
             src={"https://image.tmdb.org/t/p/w1280" + englishLogo.file_path}
-            className="z-[70] x w-full h-full max-h-[15rem] bg-center mb-10  "
-            alt=""
+            className="z-[200] w-full h-full max-h-[15rem] bg-center  "
+            loading="lazy"
           />
         )}
       </div>

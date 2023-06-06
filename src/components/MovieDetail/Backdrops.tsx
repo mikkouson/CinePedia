@@ -32,22 +32,9 @@ const Backdrops = ({ movieId }: { movieId: number }) => {
               grabCursor={true}
               breakpoints={{
                 0: {
-                  slidesPerView: 1,
-                },
-                320: {
-                  slidesPerView: 2,
-                  spaceBetween: 10,
-                },
-                480: {
-                  slidesPerView: 3,
-                  spaceBetween: 20,
-                },
-                640: {
                   slidesPerView: 4,
                 },
-                768: {
-                  slidesPerView: 5,
-                },
+
                 1024: {
                   slidesPerView: 6,
                 },

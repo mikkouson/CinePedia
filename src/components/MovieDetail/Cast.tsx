@@ -25,17 +25,17 @@ const Cast = ({ movieId }: { movieId: number }) => {
   return (
     <>
       {cast && cast.length > 0 && (
-        <section className="px-10 2xl:px-0 relative movieDetails  max-w-screen-2xl mx-auto ">
+        <section className="px-5  1lg:px-10  2xl:px-0 relative movieDetails  max-w-screen-2xl mx-auto ">
           <div className="absolute w-10 h-full right-0 bg-gradient-to-r from-transparent to-[#0e0e0e] z-[100]"></div>
-          <h2 className="text-white text-3xl font-bold mt-20">Casts:</h2>
-          <div className="Cast my-5 w-full">
+          <h2 className="text-white text-3xl font-bold  mt-6">Casts:</h2>
+          <div className="Cast my-5 ">
             <Swiper
               spaceBetween={0}
               slidesPerView={9}
               grabCursor={true}
               resizeObserver={false}
               breakpoints={{
-                0: {
+                320: {
                   slidesPerView: 2,
                 },
                 480: {
@@ -71,6 +71,7 @@ const Cast = ({ movieId }: { movieId: number }) => {
                           }
                           className="w-full h-full object-cover rounded-xl "
                           alt="Profile N/A"
+                          loading="lazy"
                         />
                       ) : (
                         <img
@@ -81,9 +82,11 @@ const Cast = ({ movieId }: { movieId: number }) => {
                         />
                       )}
                     </div>
-                    <div className="castDetails font-normal whitespace-nowrap overflow-hidden text-ellipsis mt-2">
+                    <div className=" castDetails font-normal whitespace-nowrap overflow-hidden text-ellipsis mt-2 pr-6 py-3 ">
                       <p className="font-semibold"> {casts.name}</p>
-                      <p className="text-[#ffffffc4]">{casts.character}</p>
+                      <p className="text-[#ffffffc4]  whitespace-nowrap overflow-hidden text-ellipsis">
+                        {casts.character}
+                      </p>
                       <p className="text-[#ffffffc4]">
                         {casts.known_for_department}
                       </p>

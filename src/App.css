@@ -5,6 +5,10 @@
 * {
   box-sizing: border-box;
 }
+body,
+html {
+  height: 100%;
+}
 body {
   overflow-x: hidden;
   background: #000000f1;

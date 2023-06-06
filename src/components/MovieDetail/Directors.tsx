@@ -28,12 +28,12 @@ const Directors = ({ movieId }: { movieId: number }) => {
   return (
     <>
       {director && director.length > 0 && (
-        <section className="px-10 2xl:relative movieDetails  max-w-screen-2xl mx-auto">
+        <section className="px-5  1lg:px-10  2xl:px-0 relative movieDetails  max-w-screen-2xl mx-auto ">
           <div className="absolute w-10 h-full right-0 bg-gradient-to-r from-transparent to-[#0e0e0e] z-[100]"></div>
           <h2 className="text-white text-3xl font-bold mt-6">
             Directors / Writers:
           </h2>
-          <div className="Cast my-5 w-full">
+          <div className="Cast my-5 ">
             <Swiper
               spaceBetween={0}
               slidesPerView={9}
@@ -62,7 +62,7 @@ const Directors = ({ movieId }: { movieId: number }) => {
                   slidesPerView: 8,
                 },
               }}
-              className="max-w-screen-2xl mx-auto"
+              className="w-full"
             >
               {director.map((directors, index) => (
                 <SwiperSlide key={index}>
@@ -76,12 +76,14 @@ const Directors = ({ movieId }: { movieId: number }) => {
                           }
                           className="w-full h-full object-cover rounded-xl "
                           alt="Profile N/A"
+                          loading="lazy"
                         />
                       ) : (
                         <img
                           src="https://placehold.co/250x400/000000/000000f1?text=N/A"
                           className="w-full h-full object-cover rounded-xl "
                           alt="Profile N/A"
+                          loading="lazy"
                         />
                       )}
                     </div>

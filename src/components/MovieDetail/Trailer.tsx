@@ -25,9 +25,9 @@ const Trailer = ({ movieId }: { movieId: number }) => {
   return (
     <div>
       {trailer && trailer.length > 0 && (
-        <span className="text-white inline-block mt-5">
+        <span className="text-white inline-block mt-3">
           <a
-            className="cursor-pointer  text-[#ffffff] bg-[#ffffff11] rounded-xl px-8 py-2   hover:bg-[#ffffff1f] z[50]"
+            className="px-5 py-1.5   2xs:px-8  cursor-pointer  text-[#ffffff] bg-[#ffffff11] rounded-xl  hover:bg-[#ffffff1f] z[50]"
             onClick={() => setShowTrailer(true)}
           >
             Watch Random Trailer
