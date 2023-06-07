@@ -59,7 +59,7 @@ const Collection = ({ movie }: { movie: MovieProps }) => {
             </div>
             <div className="details lg:ml-5 z-[125]">
               <h2 className="text-3xl font-bold">{collection?.name}</h2>
-              <p className="text-[#ffffffc4] font-normal text-lg">
+              <p className="text-sm lg:text-lg text-[#ffffffc4] font-normal ">
                 {collection?.overview}
               </p>
               <div className=" justify-center 1lg:justify-start collections flex flex-wrap   mt-5 p-2">
