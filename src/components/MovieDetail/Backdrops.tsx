@@ -1,16 +1,12 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { fetchBackdrop } from "../../api/api";
+import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, { Autoplay } from "swiper";
+
 import "swiper/css";
 import "swiper/css/navigation";
-import "swiper/css/pagination";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Swiper as SwiperType } from "swiper";
 
-// ...
-
-const swiperRef = useRef<SwiperType | null>(null);
-
-import { fetchBackdrop } from "../../api/api";
-import Bg from "./Bg";
+SwiperCore.use([Autoplay]);
 
 interface Backdrop {
   id: number;
@@ -18,40 +14,37 @@ interface Backdrop {
   file_path: string;
 }
 
-import { Autoplay } from "swiper";
-import "swiper/css/effect-coverflow";
-
-const Backdrops = ({ movieId }: { movieId: number }) => {
+const Backdrops = ({
+  movieId,
+  onActiveSlidePathChange,
+}: {
+  movieId: number;
+  onActiveSlidePathChange: (path: string) => void;
+}) => {
   const [backdrop, setBackdrop] = useState<Backdrop[]>([]);
-  const [activeSlide, setActiveSlide] = useState<number>(0);
-  const [activeSlidePath, setActiveSlidePath] = useState<string>("");
-
-  const swiperRef = useRef<SwiperType | null>(null);
-  console.log(activeSlidePath);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
-      const backdropData = await fetchBackdrop(movieId);
-      setBackdrop(backdropData);
+      setBackdrop(await fetchBackdrop(movieId));
     };
     fetchData();
   }, [movieId]);
 
-  const handleSlideChange = (swiper: any) => {
-    setActiveSlide(swiper.activeIndex);
-    const currentBackdrop = backdrop[swiper.activeIndex];
-    setActiveSlidePath(currentBackdrop.file_path);
-  };
-
   useEffect(() => {
-    if (swiperRef.current) {
-      swiperRef.current.slideTo(activeSlide);
+    if (backdrop.length > 0) {
+      const currentBackdrop = backdrop[activeIndex];
+      onActiveSlidePathChange(currentBackdrop.file_path);
     }
-  }, [activeSlide]);
+  }, [activeIndex, backdrop, onActiveSlidePathChange]);
 
-  const handleAutoplay = () => {
-    if (swiperRef.current && activeSlide !== swiperRef.current.realIndex) {
-      setActiveSlide(swiperRef.current.realIndex);
+  const swiperRef = useRef<any | null>(null);
+
+  const handleMakeActiveImage = (index: number) => {
+    setActiveIndex(index);
+
+    if (swiperRef.current?.swiper) {
+      swiperRef.current.swiper.slideTo(index);
     }
   };
 
@@ -61,19 +54,15 @@ const Backdrops = ({ movieId }: { movieId: number }) => {
         <div className="boxes w-full relative max-w-screen-2xl mx-auto z-[101]">
           <div className="absolute w-10 h-full right-0 bg-gradient-to-r from-transparent to-[#0e0e0e] z-[40]"></div>
           <div className="absolute w-10 left-0 h-full inset-x-0 bg-gradient-to-l from-transparent to-[#0e0e0e] z-[40]"></div>
-          {/* {activeSlidePath && <Bg activeSlidePath={activeSlidePath} />} */}
-
           <Swiper
+            ref={swiperRef}
             spaceBetween={0}
             slidesPerView={8}
             grabCursor={true}
-            modules={[Autoplay]}
+            onSlideChange={({ activeIndex }) => setActiveIndex(activeIndex)}
             autoplay={{
               delay: 2500,
               disableOnInteraction: false,
-              on: {
-                end: handleAutoplay,
-              },
             }}
             breakpoints={{
               0: {
@@ -89,24 +78,21 @@ const Backdrops = ({ movieId }: { movieId: number }) => {
                 slidesPerView: 8,
               },
             }}
-            className="w-full mySwiper1"
-            onSlideChange={handleSlideChange}
-            onSwiper={(swiper) => {
-              swiperRef.current = swiper;
-            }}
+            className="w-full"
           >
             {backdrop.map((backdrops, index) => (
               <SwiperSlide
                 className={`mr-4 ${
-                  index === activeSlide ? "border-2 border-blue-500" : ""
+                  index === activeIndex ? "border-2 border-red-500" : ""
                 }`}
                 key={index}
-                onClick={() => setActiveSlide(index)}
+                onClick={() => handleMakeActiveImage(index)}
               >
                 <img
                   className="w-full h-full object-cover rounded-xl mr-10"
                   src={"https://image.tmdb.org/t/p/w1280" + backdrops.file_path}
                   loading="lazy"
+                  alt=""
                 />
               </SwiperSlide>
             ))}

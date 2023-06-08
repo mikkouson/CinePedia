@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Backdrops from "./Backdrops";
 import Bg from "./Bg";
 import Logo from "./Logo";
@@ -29,8 +30,14 @@ function convertTime(time: number) {
   return `${hours}h ${minutes}m`;
 }
 const Header = ({ movieId, movie }: { movieId: number; movie: MovieProps }) => {
+  const [activeSlidePath, setActiveSlidePath] = useState<string>("");
+
+  const handleActiveSlidePathChange = (path: string) => {
+    setActiveSlidePath(path);
+  };
+
   const posterUrl = movie?.backdrop_path
-    ? `https://image.tmdb.org/t/p/w1280${movie?.backdrop_path}`
+    ? `https://image.tmdb.org/t/p/w1280${activeSlidePath}`
     : "https://placehold.co/300x800/000000/000000f1?text=N/A";
 
   return (
@@ -46,7 +53,10 @@ const Header = ({ movieId, movie }: { movieId: number; movie: MovieProps }) => {
             </div>
           </div>
           <div className="absolute w-full h-full inset-0 bg-gradient-to-r from-[#000000a2] to-[#00000059]  "></div>
-          <Backdrops movieId={movieId} />
+          <Backdrops
+            movieId={movieId}
+            onActiveSlidePathChange={handleActiveSlidePathChange}
+          />
 
           <div className="absolute bottom-[0rem] h-[4rem] bg-gradient-to-b from-transparent to-[#0e0e0e] w-full z-[100]"></div>
         </div>
@@ -142,7 +152,10 @@ const Header = ({ movieId, movie }: { movieId: number; movie: MovieProps }) => {
               </div>
             </div>
           </div>
-          <Backdrops movieId={movieId} />
+          <Backdrops
+            movieId={movieId}
+            onActiveSlidePathChange={handleActiveSlidePathChange}
+          />
           <div className="absolute bottom-[0rem] h-[30rem] bg-gradient-to-b from-transparent to-[#0e0e0e] w-full z-[100]"></div>
         </div>
       </header>
