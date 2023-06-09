@@ -35,6 +35,9 @@ const Cast = ({ movieId }: { movieId: number }) => {
               grabCursor={true}
               resizeObserver={false}
               breakpoints={{
+                0: {
+                  slidesPerView: 1,
+                },
                 320: {
                   slidesPerView: 2,
                 },

@@ -18,6 +18,9 @@ const MovieList = ({ movies }: { movies: MovieProps[] }) => {
       grabCursor={true}
       resizeObserver={false}
       breakpoints={{
+        0: {
+          slidesPerView: 1,
+        },
         320: {
           slidesPerView: 2,
         },
