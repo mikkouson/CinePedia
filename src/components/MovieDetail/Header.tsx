@@ -36,7 +36,7 @@ const Header = ({ movieId, movie }: { movieId: number; movie: MovieProps }) => {
     setActiveSlidePath(path);
   };
 
-  const posterUrl = movie?.backdrop_path
+  const posterUrl = activeSlidePath
     ? `https://image.tmdb.org/t/p/w1280${activeSlidePath}`
     : "https://placehold.co/300x800/000000/000000f1?text=N/A";
 
