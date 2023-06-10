@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { Autoplay, Thumbs } from "swiper";
-import "swiper/css";
-import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { fetchBackdrop } from "../../api/api";
+import "swiper/css";
+import "swiper/css/navigation";
+
 interface Backdrop {
   id: number;
   name: string;
@@ -19,8 +20,11 @@ const Backdrops = ({
 }) => {
   const [backdrop, setBackdrop] = useState<Backdrop[]>([]);
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
-
   const [selectedSlide, setSelectedSlide] = useState(0);
+
+  const handleSlideChange = (swiper: any) => {
+    setSelectedSlide(swiper.activeIndex);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,14 +32,13 @@ const Backdrops = ({
     };
     fetchData();
   }, [movieId]);
-  const handleSlideChange = (swiper: any) => {
-    setSelectedSlide(swiper.activeIndex);
-  };
+
   useEffect(() => {
-    if (backdrop.length > 0) {
+    if (backdrop.length > 0 && selectedSlide < backdrop.length) {
       onActiveSlidePathChange(backdrop[selectedSlide].file_path);
     }
-  }, [backdrop[selectedSlide]]);
+  }, [backdrop, selectedSlide]);
+
   return (
     <>
       {backdrop && backdrop.length > 0 && (
