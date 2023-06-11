@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Backdrops from "./Backdrops";
-import Bg from "./Bg";
 import Logo from "./Logo";
 import Trailer from "./Trailer";
 

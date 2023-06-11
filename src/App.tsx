@@ -3,7 +3,7 @@ import Navigation from "./components/Layout/Navigation";
 import Home from "./pages/Home";
 import { useFetch } from "./hooks/useFetch";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import MovieInfo from "./components/MovieInfo";
+import MovieInfo from "./pages/MovieInfo";
 import SearchMovie from "./components/SearchMovie";
 function App() {
   const movies = useFetch();
