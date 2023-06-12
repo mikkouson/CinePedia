@@ -4,19 +4,12 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Overview from "./Overview";
+import { Movie } from "../MovieContainer";
 
 interface HomeProps {
   movies: Movie[];
 }
-interface Movie {
-  id: number;
-  title: string;
-  overview: string;
-  release_date: string;
-  status: string;
-  backdrop_path: string;
-  poster_path: string;
-}
+
 const Headers = ({ movies }: HomeProps) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
