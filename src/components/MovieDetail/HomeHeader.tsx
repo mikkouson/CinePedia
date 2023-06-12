@@ -1,22 +1,30 @@
-import { Swiper, SwiperSlide } from "swiper/react";
+import { useState } from "react";
 import { Autoplay, Thumbs } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
-import Logo from "./Logo";
-import { useState } from "react";
-import MovieDetailsBtn from "../Buttons/MovieDetailsBtn";
-import { Movie } from "../MovieContainer";
+import { Swiper, SwiperSlide } from "swiper/react";
+import Overview from "./Overview";
 
 interface HomeProps {
   movies: Movie[];
 }
-
+interface Movie {
+  id: number;
+  title: string;
+  overview: string;
+  release_date: string;
+  status: string;
+  backdrop_path: string;
+  poster_path: string;
+}
 const Headers = ({ movies }: HomeProps) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const hadleCurrentSlide = (swiper: any) => {
     setCurrentSlide(swiper.currentSlide);
   };
+  console.log(movies);
+
   return (
     <header className="w-full text-white min-h-[80vh] ">
       <Swiper
@@ -41,18 +49,17 @@ const Headers = ({ movies }: HomeProps) => {
               }}
             >
               <div className="absolute w-full h-full inset-0 bg-gradient-to-r from-[#000000] to-[#00000024]  " />
-
               <div className="w-full max-w-screen-2xl mx-auto z-[110] flex">
-                <div className=" detail w-1/2 h-full flex flex-col justify-center  ">
-                  <div className="w-[50%]">
-                    <Logo movieId={movie.id} />
-                  </div>
-                  <h1 className="text-2xl 2xs:text-3xl">{movie.title}</h1>
-
-                  <p className="text-[#ffffffb6] mt-3">{movie.overview}</p>
-                  <MovieDetailsBtn movieId={movie.id} />
+                <div className="w-[50%]">
+                  <Overview
+                    movieId={movie.id}
+                    movie={movie}
+                    show={true}
+                    status={""}
+                    genres={[]}
+                    runtime={0}
+                  />
                 </div>
-
                 <div className="  posterContainer  w-1/2 flex items-center justify-center z-[200] py-16">
                   <div className=" black  w-[18rem]">
                     <img

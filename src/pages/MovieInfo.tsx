@@ -7,7 +7,9 @@ import Recommendation from "../components/MovieDetail/Recommendation";
 const Cast = lazy(() => import("../components/MovieDetail/Cast"));
 const Directors = lazy(() => import("../components/MovieDetail/Directors"));
 const Collection = lazy(() => import("../components/MovieDetail/Collection"));
-const Header = lazy(() => import("../components/MovieDetail/Header"));
+const Header = lazy(
+  () => import("../components/MovieDetail/MovieDetailsHeader")
+);
 
 const MovieInfo = () => {
   const { id } = useParams();

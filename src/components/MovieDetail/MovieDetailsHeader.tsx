@@ -2,6 +2,7 @@ import { useState } from "react";
 import Backdrops from "./Backdrops";
 import Logo from "./Logo";
 import Trailer from "./Trailer";
+import Overview from "./Overview";
 
 interface Genre {
   id: number;
@@ -118,37 +119,17 @@ const Header = ({ movieId, movie }: { movieId: number; movie: MovieProps }) => {
           <div className=" px-10 2xl:px-0 details marker:h-full w-full min-h-[88lvh] flex items-center max-w-screen-2xl mx-auto z-[101] ">
             <div className="w-full  1lg:w-1/2  py-16">
               {/* Movie logo image */}
-              <div className="w-[50%]">
-                <Logo movieId={movieId} />
-              </div>
-              <h1 className="text-4xl lg:text-5xl text-white font-medium mb-1">
-                {movie.title}
-              </h1>
-              <div className="text-sm base:text-lg">
-                <p className="text-[#ffffffd0] text-lg mb-5">
-                  {movie.release_date.substr(0, 4)} | {movie.status} |{" "}
-                  {convertTime(movie.runtime)}
-                </p>
-                {/* Movie tags/genre */}
-                <h3 className="font-semibold text-[#ffffffd0] text-xl">
-                  Tags:
-                </h3>
-                <div className="tags my-3">
-                  {movie.genres.map((genre) => (
-                    <a
-                      className="cursor-pointer text-[#ffffff] bg-[#ffffff11] rounded-xl px-4 py-1 mr-2 hover:bg-[#ffffff1f]"
-                      key={genre.id}
-                    >
-                      {genre.name}
-                    </a>
-                  ))}
-                </div>
-                <p className="text-[.9rem] lg:text-lg text-[#ffffffc4] font-normal">
-                  {movie.overview}
-                </p>
-                {/* Get movie Trailer */}
-                <Trailer movieId={movieId} />
-              </div>
+
+              <Overview
+                movie={movie}
+                movieId={movieId}
+                status={""}
+                genres={[]}
+                runtime={0}
+              />
+
+              {/* Get movie Trailer */}
+              <Trailer movieId={movieId} />
             </div>
           </div>
           <Backdrops

@@ -14,7 +14,7 @@ const MovieList = ({ movies }: { movies: MovieProps[] }) => {
   return (
     <Swiper
       spaceBetween={0}
-      slidesPerView={9}
+      slidesPerView={7}
       grabCursor={true}
       resizeObserver={false}
       breakpoints={{
@@ -24,23 +24,22 @@ const MovieList = ({ movies }: { movies: MovieProps[] }) => {
         320: {
           slidesPerView: 2,
         },
-        480: {
-          slidesPerView: 3,
-        },
-        640: {
+        400: {
           slidesPerView: 4,
         },
-        768: {
+
+        700: {
+          slidesPerView: 4,
+        },
+
+        900: {
           slidesPerView: 5,
         },
-        1024: {
+        1100: {
           slidesPerView: 6,
         },
-        1280: {
-          slidesPerView: 7,
-        },
         1440: {
-          slidesPerView: 8,
+          slidesPerView: 7,
         },
       }}
       className="max-w-screen-2xl mx-auto"
@@ -48,17 +47,19 @@ const MovieList = ({ movies }: { movies: MovieProps[] }) => {
       {movies &&
         movies.map((result) => (
           <SwiperSlide key={result.id}>
-            <div className="movieContainer ">
-              <div className="box w-36 h-44 flex flex-col items-center">
+            <div className="movieContainer ml-2">
+              <div className="box h-40 2md:h-60 2lg:h-72  w-full  flex flex-col items-center">
                 {result.poster_path ? (
-                  <img
-                    src={
-                      "https://image.tmdb.org/t/p/w1280" + result.poster_path
-                    }
-                    className="w-full h-full object-cover rounded-xl"
-                    alt="Profile N/A"
-                    loading="lazy"
-                  />
+                  <>
+                    <img
+                      src={
+                        "https://image.tmdb.org/t/p/w1280" + result.poster_path
+                      }
+                      className="w-full h-full object-fit rounded-xl"
+                      alt="Profile N/A"
+                      loading="lazy"
+                    />
+                  </>
                 ) : (
                   <img
                     src="https://placehold.co/250x400/000000/000000f1?text=N/A"
