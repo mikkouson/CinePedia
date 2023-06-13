@@ -16,7 +16,6 @@ const Headers = ({ movies }: HomeProps) => {
   const hadleCurrentSlide = (swiper: any) => {
     setCurrentSlide(swiper.currentSlide);
   };
-  console.log(movies);
 
   return (
     <header className="w-full text-white min-h-[80vh] ">

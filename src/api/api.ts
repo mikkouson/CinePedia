@@ -22,16 +22,27 @@ export const fetchMovies = async () => {
   return data.results;
 };
 
-export const fetchsearch = async () => {
-  const response = await api.get(`/search/movie`);
-  const { data } = response;
-  return data.query;
-};
-
 export const fetchMovie = async (id: number) => {
   const response = await api.get(`/movie/${id}`);
   const { data } = response;
   return data;
+};
+
+export const fetchTV = async () => {
+  const response = await api.get(`trending/tv/day`);
+  const { data } = response;
+  return data.results;
+};
+export const fetchTopRated = async () => {
+  const response = await api.get(`/movie/top_rated`);
+  const { data } = response;
+  return data.results;
+};
+
+export const fetchsearch = async () => {
+  const response = await api.get(`/search/movie`);
+  const { data } = response;
+  return data.query;
 };
 
 export const fetchMovieCredits = async (id: number) => {
