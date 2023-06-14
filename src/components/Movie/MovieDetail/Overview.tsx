@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { fetchMovie } from "../../api/api";
-import MovieDetailsBtn from "../Buttons/MovieDetailsBtn";
+import { fetchMovie } from "../../../api/api";
+import MovieDetailsBtn from "../../Buttons/MovieDetailsBtn";
 import Logo from "./Logo";
 
 interface MovieProps {
@@ -51,7 +51,10 @@ const Overview = ({
         {movieSpecifics && (
           <>
             <p className="text-[#ffffffd0] text-base mb-5">
-              {movie.release_date.substr(0, 4)} | {movieSpecifics.status} |{" "}
+              {movie && movie.release_date
+                ? movie.release_date.substr(0, 4)
+                : ""}{" "}
+              | {movieSpecifics && movieSpecifics.status} |{" "}
               {convertTime(movieSpecifics.runtime)} {/* Display the runtime */}
             </p>
             <h3 className="font-semibold text-[#ffffffd0] text-xl">Tags:</h3>

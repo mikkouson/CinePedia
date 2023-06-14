@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Autoplay, Thumbs } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { fetchBackdrop } from "../../api/api";
+import { fetchBackdrop } from "../../../api/api";
 import "swiper/css";
 import "swiper/css/navigation";
 

@@ -1,6 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useEffect, useState } from "react";
-import { fetchDirectors } from "../../api/api";
+import { fetchDirectors } from "../../../api/api";
 import "swiper/css";
 import "swiper/css/navigation";
 interface Crew {

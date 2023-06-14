@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { fetchMovieCredits } from "../../api/api";
+import { fetchMovieCredits } from "../../../api/api";
 import "swiper/css";
 import "swiper/css/navigation";
 

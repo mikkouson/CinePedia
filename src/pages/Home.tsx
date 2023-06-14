@@ -1,8 +1,10 @@
 import { Movie } from "../components/MovieContainer";
-import Headers from "../components/MovieDetail/HomeHeader";
-import PopularMovie from "../components/MovieDetail/PopularMovie";
-import TrendingTV from "../components/MovieDetail/TrendingTV";
-import TopRated from "../components/TopRated";
+import Headers from "../components/Movie/HomePage/HomeHeader";
+import PopularMovie from "../components/Movie/HomePage/PopularMovie";
+import NowPlaying from "../components/Movie/HomePage/NowPlaying";
+import TopRated from "../components/Movie/HomePage/TopRated";
+import TopPeople from "../components/People/TopPeople";
+// import Collections from "./Collections";
 
 interface HomeProps {
   movies: Movie[];
@@ -13,8 +15,10 @@ const Home = ({ movies }: HomeProps) => {
       <Headers movies={movies} />
       <main className="max-w-screen-2xl mx-auto">
         <PopularMovie movies={movies} />
-        <TrendingTV />
         <TopRated />
+        <NowPlaying />
+        <TopPeople />
+        {/* <Collections movies={movies} /> */}
       </main>
     </>
   );

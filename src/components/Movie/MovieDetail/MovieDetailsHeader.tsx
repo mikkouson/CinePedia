@@ -76,10 +76,6 @@ const Header = ({ movieId, movie }: { movieId: number; movie: MovieProps }) => {
                 <div className="text">
                   <h1 className="text-2xl 2xs:text-3xl">{movie.title}</h1>
                   <div className="text-sm base:text-lg">
-                    <p className="text-[#ffffffd0] text-base ">
-                      {movie.release_date.substr(0, 4)} | {movie.status} |{" "}
-                      {convertTime(movie.runtime)}
-                    </p>
                     {/* Movie tags/genre */}
                     <div className="flex items-center my.5">
                       <h3 className="font-semibold text-[#ffffffd0] text-sm mr-2 ">

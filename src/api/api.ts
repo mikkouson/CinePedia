@@ -28,8 +28,8 @@ export const fetchMovie = async (id: number) => {
   return data;
 };
 
-export const fetchTV = async () => {
-  const response = await api.get(`trending/tv/day`);
+export const fetcghNowPlaying = async () => {
+  const response = await api.get(`movie/now_playing`);
   const { data } = response;
   return data.results;
 };
@@ -90,4 +90,23 @@ export const fetchRecommendation = async (id: number) => {
   const response = await api.get(`/movie/${id}/recommendations`);
   const { data } = response;
   return data || [];
+};
+
+export const fetchPeople = async () => {
+  const response = await api.get(`person/popular`);
+  const { data } = response;
+  return data.results;
+};
+
+export const fetchCollections = async () => {
+  const response = await api.get(`/discover/movie`, {
+    params: {
+      with_collections: true,
+      sort_by: 'popularity.desc',
+      page: 1,
+      per_page: 10
+    }
+  });
+  const { data } = response;
+  return data.results;
 };

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { fetchCollection } from "../../api/api";
+import { fetchCollection } from "../../../api/api";
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -37,7 +37,9 @@ const Collection = ({ movie }: { movie: MovieProps }) => {
     };
     fetchData();
   }, [movie]);
+
   const posterUrl = `https://image.tmdb.org/t/p/w1280${collection?.backdrop_path}`;
+
   return (
     <>
       {collection && (

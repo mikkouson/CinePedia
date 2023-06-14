@@ -1,14 +1,18 @@
 import { Suspense, lazy, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchMovie } from "../api/api";
-import Similar from "../components/MovieDetail/Similar";
-import Recommendation from "../components/MovieDetail/Recommendation";
+import Similar from "../components/Movie/MovieDetail/Similar";
+import Recommendation from "../components/Movie/MovieDetail/Recommendation";
 
-const Cast = lazy(() => import("../components/MovieDetail/Cast"));
-const Directors = lazy(() => import("../components/MovieDetail/Directors"));
-const Collection = lazy(() => import("../components/MovieDetail/Collection"));
+const Cast = lazy(() => import("../components/Movie/MovieDetail/Cast"));
+const Directors = lazy(
+  () => import("../components/Movie/MovieDetail/Directors")
+);
+const Collection = lazy(
+  () => import("../components/Movie/MovieDetail/Collection")
+);
 const Header = lazy(
-  () => import("../components/MovieDetail/MovieDetailsHeader")
+  () => import("../components/Movie/MovieDetail/MovieDetailsHeader")
 );
 
 const MovieInfo = () => {

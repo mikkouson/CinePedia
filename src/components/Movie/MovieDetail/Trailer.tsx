@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchTrailer } from "../../api/api";
+import { fetchTrailer } from "../../../api/api";
 
 const Trailer = ({ movieId }: { movieId: number }) => {
   const [trailer, setTrailer] = useState([]);

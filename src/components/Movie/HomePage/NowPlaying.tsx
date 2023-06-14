@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { fetchTV } from "../../api/api";
-import MovieList from "./MovieList";
+import { fetcghNowPlaying } from "../../../api/api";
+import MovieList from "../MovieDetail/MovieList";
 
-const TrendingTV = () => {
+const NowPlaying = () => {
   const [trending, setTrending] = useState();
 
   useEffect(() => {
     const data = async () => {
-      setTrending(await fetchTV());
+      setTrending(await fetcghNowPlaying());
     };
     data();
   }, []);
@@ -17,12 +17,12 @@ const TrendingTV = () => {
       {trending && (
         <section>
           <h2 className="text-white text-3xl font-semibold my-6">
-            Trending TV Shows
+            Now Playing
           </h2>
-          <MovieList movies={trending} ismovieName={true} />
+          <MovieList movies={trending} />
         </section>
       )}
     </>
   );
 };
-export default TrendingTV;
+export default NowPlaying;

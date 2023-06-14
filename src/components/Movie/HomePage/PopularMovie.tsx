@@ -1,5 +1,5 @@
-import { Movie } from "../MovieContainer";
-import MovieList from "./MovieList";
+import { Movie } from "../../MovieContainer";
+import MovieList from "../MovieDetail/MovieList";
 interface HomeProps {
   movies: Movie[];
 }

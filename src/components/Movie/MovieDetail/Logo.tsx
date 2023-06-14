@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchLogo } from "../../api/api";
+import { fetchLogo } from "../../../api/api";
 
 interface Logos {
   id: number;

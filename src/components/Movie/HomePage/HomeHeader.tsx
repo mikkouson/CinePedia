@@ -3,8 +3,8 @@ import { Autoplay, Thumbs } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Overview from "./Overview";
-import { Movie } from "../MovieContainer";
+import Overview from "../MovieDetail/Overview";
+import { Movie } from "../../MovieContainer";
 
 interface HomeProps {
   movies: Movie[];

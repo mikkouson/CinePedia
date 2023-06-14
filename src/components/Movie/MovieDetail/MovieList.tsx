@@ -4,20 +4,13 @@ import "swiper/css/navigation";
 import { AiFillStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
 interface MovieProps {
-  name?: string;
   vote_average: number;
   release_date: string;
   poster_path: string;
   id: number;
   title: string;
 }
-const MovieList = ({
-  movies,
-  ismovieName,
-}: {
-  movies: MovieProps[];
-  ismovieName?: boolean;
-}) => {
+const MovieList = ({ movies }: { movies: MovieProps[] }) => {
   return (
     <Swiper
       spaceBetween={0}
@@ -78,7 +71,7 @@ const MovieList = ({
                 <div className="text-gray-600 truncate font-bold hover:text-stone-900 cursor-pointer z-[100]">
                   <Link to={`/movie/${result?.id}`}>
                     <h4 className="Title whitespace-nowrap overflow-hidden text-ellipsis text-white">
-                      {ismovieName ? result?.name : result?.title}
+                      {result.title}
                     </h4>
                   </Link>
                 </div>

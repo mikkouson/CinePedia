@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import MovieList from "./MovieList";
-import { fetchRecommendation } from "../../api/api";
+import { fetchRecommendation } from "../../../api/api";
 
 const Recommendation = ({ movieId }: { movieId: number }) => {
   const [movieRecommendation, setMovieRecommendation] = useState({

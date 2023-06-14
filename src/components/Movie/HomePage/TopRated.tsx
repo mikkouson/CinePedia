@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { fetchTopRated } from "../api/api";
-import MovieList from "./MovieDetail/MovieList";
+import { fetchTopRated } from "../../../api/api";
+import MovieList from "../MovieDetail/MovieList";
 
 const TopRated = () => {
   const [topRated, setTopRated] = useState();
@@ -10,7 +10,6 @@ const TopRated = () => {
     };
     data();
   }, []);
-  console.log(topRated);
   return (
     <>
       {topRated && (
