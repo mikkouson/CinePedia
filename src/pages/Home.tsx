@@ -4,7 +4,7 @@ import PopularMovie from "../components/Movie/HomePage/PopularMovie";
 import NowPlaying from "../components/Movie/HomePage/NowPlaying";
 import TopRated from "../components/Movie/HomePage/TopRated";
 import TopPeople from "../components/People/TopPeople";
-// import Collections from "./Collections";
+import Collections from "./Collections";
 
 interface HomeProps {
   movies: Movie[];
@@ -12,13 +12,13 @@ interface HomeProps {
 const Home = ({ movies }: HomeProps) => {
   return (
     <>
-      <Headers movies={movies} />
-      <main className="max-w-screen-2xl mx-auto">
+      <main>
+        <Headers movies={movies} />
         <PopularMovie movies={movies} />
         <TopRated />
+        <Collections movies={movies} />
         <NowPlaying />
         <TopPeople />
-        {/* <Collections movies={movies} /> */}
       </main>
     </>
   );

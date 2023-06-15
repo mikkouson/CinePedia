@@ -15,7 +15,7 @@ const NowPlaying = () => {
   return (
     <>
       {trending && (
-        <section>
+        <section className="max-w-screen-2xl mx-auto">
           <h2 className="text-white text-3xl font-semibold my-6">
             Now Playing
           </h2>

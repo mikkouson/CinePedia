@@ -48,3 +48,11 @@ body {
 .app {
   text-align: center;
 }
+.swiper-horizontal
+  > .swiper-pagination-bullets.swiper-pagination-bullets-dynamic
+  .swiper-pagination-bullet,
+.swiper-pagination-horizontal.swiper-pagination-bullets.swiper-pagination-bullets-dynamic
+  .swiper-pagination-bullet {
+  color: white;
+  background: white;
+}

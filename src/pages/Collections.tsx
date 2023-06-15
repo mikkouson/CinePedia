@@ -1,36 +1,57 @@
-// import React, { useEffect, useState } from "react";
-// import { fetchMovie } from "../api/api";
+import React, { useEffect, useState } from "react";
+import { fetchMovie } from "../api/api";
+import Collection from "../components/Movie/MovieDetail/Collection";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination, Mousewheel } from "swiper";
+import "swiper/css/pagination";
 
-// const Collections = ({ movies }) => {
-//   const [movieSpecifics, setMovieSpecifics] = useState([]);
+import "swiper/css";
 
-//   useEffect(() => {
-//     const fetchMovieDetails = async () => {
-//       const fetchedMovieDetails = await Promise.all(
-//         movies.map(async (movie) => {
-//           const movieId = movie.id;
-//           const details = await fetchMovie(Number(movieId));
-//           return details;
-//         })
-//       );
-//       setMovieSpecifics(fetchedMovieDetails);
-//     };
-//     fetchMovieDetails();
-//   }, [movies]);
+interface Movie {
+  id: number;
+}
 
-//   return (
-//     <>
-//       {movieSpecifics.map((movie, index) => (
-//         <div key={index}>
-//           {movie.belongs_to_collection && (
-//             <p className="text-white">
-//               Belongs to: {movie.belongs_to_collection.name}
-//             </p>
-//           )}
-//         </div>
-//       ))}
-//     </>
-//   );
-// };
+const Collections = ({ movies }: { movies: Movie[] }) => {
+  const [movieSpecifics, setMovieSpecifics] = useState<any[]>([]);
 
-// export default Collections;
+  useEffect(() => {
+    const fetchMovieSpecifics = async () => {
+      const movieIds = movies.map((movie) => movie.id);
+      const fetchPromises = movieIds.map((movieId) => fetchMovie(movieId));
+      const fetchedMovies = await Promise.all(fetchPromises);
+      setMovieSpecifics(fetchedMovies);
+    };
+
+    fetchMovieSpecifics();
+  }, [movies]);
+
+  return (
+    <>
+      <h2 className="max-w-screen-2xl mx-auto text-white text-3xl font-semibold my-6">
+        Featured Collection
+      </h2>
+
+      <Swiper
+        modules={[Autoplay, Pagination, Mousewheel]}
+        pagination={{
+          dynamicBullets: true,
+          clickable: true,
+        }}
+        autoplay={{ delay: 5000, disableOnInteraction: false }}
+        mousewheel={true}
+      >
+        {movieSpecifics.map((movie, index) => (
+          <div key={index} className="h-full">
+            {movie.belongs_to_collection && (
+              <SwiperSlide>
+                <Collection movie={movie} show={false} />
+              </SwiperSlide>
+            )}
+          </div>
+        ))}
+      </Swiper>
+    </>
+  );
+};
+
+export default Collections;

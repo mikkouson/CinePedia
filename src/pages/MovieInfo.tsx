@@ -34,7 +34,7 @@ const MovieInfo = () => {
         <Header movieId={Number(id)} movie={movie} />
         <Cast movieId={Number(id)} />
         <Directors movieId={Number(id)} />
-        <Collection movie={movie} />
+        <Collection movie={movie} show={true} />
         <Similar movieId={Number(id)} />
         <Recommendation movieId={Number(id)} />
       </Suspense>
