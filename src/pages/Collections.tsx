@@ -43,7 +43,7 @@ const Collections = ({ movies }: { movies: Movie[] }) => {
         {movieSpecifics.map((movie, index) => (
           <div key={index} className="h-full">
             {movie.belongs_to_collection && (
-              <SwiperSlide>
+              <SwiperSlide key={index}>
                 <Collection movie={movie} show={false} />
               </SwiperSlide>
             )}
