@@ -21,7 +21,7 @@ function Navigation() {
   }
 
   return (
-    <nav className="absolute z-[110] flex w-full h-16 px-8  bg-transparent justify-between items-center shadow-lg">
+    <nav className="absolute z-[110] flex w-full h-16 px-8  backdrop-blur-sm justify-between items-center shadow-lg">
       <div className="w-full max-w-screen-2xl mx-auto flex items-center justify-between">
         <h2
           className="text-2xl font-mono cursor-pointer text-white"
@@ -32,13 +32,16 @@ function Navigation() {
         <form onSubmit={handleSubmit}>
           <div className="relative">
             <input
-              className=" w-48 text-1xl h-9 text-[#ffffffd3] bg-gray-200 rounded-full p-2 px-5 bg-transparent border-white"
+              className=" w-48 text-1xl h-9 text-[#ffffffd3] bg-gray-200 rounded-full p-2 pl-5 pr-9 bg-transparent border-[1px] border-[#ffffff68] backdrop-blur-xl"
               type="text"
               placeholder=" Search..."
               value={query}
               onChange={(e) => setSearchMovie(e.target.value)}
             />
-            <CiSearch className="absolute top-1/2 transform -translate-y-1/2 right-5 text-gray-400" />
+            <CiSearch
+              className="absolute top-1/2 transform -translate-y-1/2 right-5 text-gray-400 cursor-pointer"
+              onClick={handleSubmit}
+            />
           </div>
         </form>
       </div>

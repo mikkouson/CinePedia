@@ -30,7 +30,7 @@ const Logo = ({ movieId }: { movieId: number }) => {
         {englishLogo && (
           <img
             src={"https://image.tmdb.org/t/p/w1280" + englishLogo.file_path}
-            className="z-[200] w-full h-full max-h-[15rem] bg-center  "
+            className="z-[200] w-full h-full max-h-[15rem] bg-center  min-w-[144px]"
             loading="lazy"
           />
         )}

@@ -110,3 +110,11 @@ export const fetchCollections = async () => {
   const { data } = response;
   return data.results;
 };
+
+
+
+export const fetchPerson = async (id: number) => {
+  const response = await api.get(`/person/${id}`);
+  const { data } = response;
+  return data;
+};

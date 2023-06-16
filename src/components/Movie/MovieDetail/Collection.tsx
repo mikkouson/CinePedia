@@ -74,7 +74,7 @@ const Collection = ({ movie, show }: { movie: MovieProps; show: Boolean }) => {
               <h2 className="text-3xl font-bold text-white">
                 {collection?.name}
               </h2>
-              <p className="text-sm lg:text-lg text-[#ffffffc4] font-normal ">
+              <p className="text-sm lg:text-lg text-[#ffffffc4] font-normal  line-clamp-5">
                 {collection?.overview}
               </p>
               <div className=" justify-center 1lg:justify-start collections flex flex-wrap   mt-5 p-2">

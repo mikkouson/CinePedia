@@ -3,7 +3,7 @@ import { fetchPeople } from "../../api/api";
 import PeopleList from "./PeopleList";
 
 const TopPeople = () => {
-  const [people, setPeople] = useState();
+  const [person, setPeople] = useState();
 
   useEffect(() => {
     const data = async () => {
@@ -13,12 +13,12 @@ const TopPeople = () => {
   }, []);
   return (
     <>
-      {people && (
-        <section className="max-w-screen-2xl mx-auto">
+      {person && (
+        <section className="max-w-screen-2xl mx-auto px-5  1lg:px-10  2xl:px-0">
           <h2 className="text-white text-3xl font-semibold my-6">
             Popular People
           </h2>
-          <PeopleList people={people} />
+          <PeopleList people={person} />
         </section>
       )}
     </>

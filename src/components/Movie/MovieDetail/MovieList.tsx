@@ -46,14 +46,14 @@ const MovieList = ({ movies }: { movies: MovieProps[] }) => {
         movies.map((result) => (
           <SwiperSlide key={result.id}>
             <div className="movieContainer ml-2">
-              <div className="box  h-[10rem] xs:h-[15rem]  1lg:h-72 w-full  flex flex-col items-center">
+              <div className=" box  h-[10rem] xs:h-[15rem]  1lg:h-72 w-full  flex flex-col items-center">
                 {result.poster_path ? (
                   <>
                     <img
                       src={
                         "https://image.tmdb.org/t/p/w1280" + result.poster_path
                       }
-                      className="w-full h-full object-cover rounded-xl"
+                      className=" h-full object-cover rounded-xl"
                       alt="Profile N/A"
                       loading="lazy"
                     />
@@ -67,7 +67,7 @@ const MovieList = ({ movies }: { movies: MovieProps[] }) => {
                   />
                 )}
               </div>
-              <div className="pr-6 py-3">
+              <div className="px-2 3xs:px-6 lg:px-3 py-3">
                 <div className="text-gray-600 truncate font-bold hover:text-stone-900 cursor-pointer z-[100]">
                   <Link to={`/movie/${result?.id}`}>
                     <h4 className="Title whitespace-nowrap overflow-hidden text-ellipsis text-white">

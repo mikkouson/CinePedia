@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { fetchMovie } from "../api/api";
-import Collection from "../components/Movie/MovieDetail/Collection";
+import { fetchMovie } from "../../../api/api";
+import Collection from "../MovieDetail/Collection";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Mousewheel } from "swiper";
 import "swiper/css/pagination";
@@ -27,7 +27,7 @@ const Collections = ({ movies }: { movies: Movie[] }) => {
 
   return (
     <>
-      <h2 className="max-w-screen-2xl mx-auto text-white text-3xl font-semibold my-6">
+      <h2 className="max-w-screen-2xl mx-auto text-white text-3xl font-semibold my-6 px-5  1lg:px-10  2xl:px-0">
         Featured Collection
       </h2>
 

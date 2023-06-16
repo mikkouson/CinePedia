@@ -47,7 +47,7 @@ const PeopleList = ({ people }: any) => {
                       src={
                         "https://image.tmdb.org/t/p/w1280" + person.profile_path
                       }
-                      className="w-full h-full object-cover rounded-xl"
+                      className=" h-full object-cover rounded-xl"
                       alt="Profile N/A"
                       loading="lazy"
                     />
@@ -55,15 +55,15 @@ const PeopleList = ({ people }: any) => {
                 ) : (
                   <img
                     src="https://placehold.co/250x400/000000/000000f1?text=N/A"
-                    className="w-full h-full object-cover rounded-xl"
+                    className=" h-full object-cover rounded-xl"
                     loading="lazy"
                     alt="Profile N/A"
                   />
                 )}
               </div>
-              <div className="pr-6 py-3">
+              <div className="px-2 3xs:px-6 lg:px-3 py-3">
                 <div className="text-gray-600 truncate font-bold hover:text-stone-900 cursor-pointer z-[100]">
-                  <Link to={`/movie/${person?.id}`}>
+                  <Link to={`/person/${person?.id}`}>
                     <h4 className="Title whitespace-nowrap overflow-hidden text-ellipsis text-white">
                       {person.name}
                     </h4>

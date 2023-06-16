@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { Autoplay, Thumbs } from "swiper";
+import { Autoplay, Pagination, Thumbs } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Overview from "../MovieDetail/Overview";
 import { Movie } from "../../MovieContainer";
-
+import "swiper/css/pagination";
 interface HomeProps {
   movies: Movie[];
 }
@@ -18,11 +18,15 @@ const Headers = ({ movies }: HomeProps) => {
   };
 
   return (
-    <header className="w-full text-white min-h-[80vh] ">
+    <header className=" w-full text-white min-h-[30vh] 1xs:min-h-[50vh] 2xs:min-h-[80vh] ">
       <Swiper
         spaceBetween={0}
         grabCursor={true}
-        modules={[Thumbs, Autoplay]}
+        modules={[Thumbs, Autoplay, Pagination]}
+        pagination={{
+          dynamicBullets: true,
+          clickable: true,
+        }}
         autoplay={{
           delay: 7000,
           disableOnInteraction: false,
@@ -35,14 +39,14 @@ const Headers = ({ movies }: HomeProps) => {
         {movies.map((movie) => (
           <SwiperSlide key={movie.id}>
             <div
-              className="w-full h-full min-h-[80vh] flex relative  bg-cover bg-no-repeat bg-center  "
+              className="min-h-[30vh] 1xs:min-h-[50vh] 2xs:min-h-[80vh] w-full h-full  flex relative  bg-cover bg-no-repeat bg-center  "
               style={{
                 backgroundImage: `url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`,
               }}
             >
               <div className="absolute w-full h-full inset-0 bg-gradient-to-r from-[#000000] to-[#00000024]  " />
               <div className="w-full max-w-screen-2xl mx-auto z-[110] flex">
-                <div className="w-[50%]">
+                <div className=" w-full 1lg:w-[50%] px-5  1lg:px-10  2xl:px-0">
                   <Overview
                     movieId={movie.id}
                     movie={movie}
@@ -52,8 +56,8 @@ const Headers = ({ movies }: HomeProps) => {
                     runtime={0}
                   />
                 </div>
-                <div className="  posterContainer  w-1/2 flex items-center justify-center z-[200] py-16">
-                  <div className=" black  w-[18rem]">
+                <div className=" hidden 1lg:flex  posterContainer  w-1/2  items-center justify-center z-[200] py-16">
+                  <div className="black  w-[18rem]">
                     <img
                       src={`https://image.tmdb.org/t/p/w1280${movie.poster_path}`}
                       className="rounded-xl"
@@ -63,15 +67,14 @@ const Headers = ({ movies }: HomeProps) => {
                 </div>
               </div>
             </div>
-            <div className="absolute bottom-[0rem] h-[30rem] bg-gradient-to-b from-transparent to-[#0e0e0e] w-full z-[100]"></div>
+            <div className="absolute bottom-[0rem] h-[30rem] bg-gradient-to-b from-[#0e0e0e00] to-[#0e0e0e] w-full z-[100]"></div>
           </SwiperSlide>
         ))}
       </Swiper>
 
-      <div className="relative max-w-screen-2xl mx-auto">
+      <div className="relative max-w-screen-2xl mx-auto hidden xs:block">
         <div className="absolute w-20 h-full right-0 bg-gradient-to-r from-transparent to-[#0e0e0e] z-[40]"></div>
         <div className="absolute w-20 left-0 h-full inset-x-0 bg-gradient-to-l from-transparent to-[#0e0e0e] z-[40]"></div>
-
         <Swiper
           onSwiper={setThumbsSwiper}
           spaceBetween={10}
@@ -81,6 +84,9 @@ const Headers = ({ movies }: HomeProps) => {
           className="mySwiper "
           breakpoints={{
             0: {
+              slidesPerView: 3,
+            },
+            600: {
               slidesPerView: 4,
             },
             1024: {
@@ -96,7 +102,7 @@ const Headers = ({ movies }: HomeProps) => {
         >
           {movies.map((movie) => (
             <SwiperSlide key={movie.id}>
-              <div className="relative">
+              <div className="relative ">
                 <img
                   className="w-full h-full object-cover rounded-xl mr-10  "
                   src={"https://image.tmdb.org/t/p/w1280" + movie.backdrop_path}
@@ -112,6 +118,11 @@ const Headers = ({ movies }: HomeProps) => {
             </SwiperSlide>
           ))}
         </Swiper>
+      </div>
+      <div id="scroll-down-animation " className="hidden 2xs:block">
+        <span className="mouse">
+          <span className="move"></span>
+        </span>
       </div>
     </header>
   );
