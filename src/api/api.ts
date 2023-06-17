@@ -112,9 +112,13 @@ export const fetchCollections = async () => {
 };
 
 
-
 export const fetchPerson = async (id: number) => {
   const response = await api.get(`/person/${id}`);
+  const { data } = response;
+  return data;
+};
+export const fetchPersonCredits = async (id: number) => {
+  const response = await api.get(`/person/${id}/movie_credits`);
   const { data } = response;
   return data;
 };
