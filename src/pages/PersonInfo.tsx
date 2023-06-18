@@ -4,6 +4,7 @@ import { BsBalloon, BsBookmark } from "react-icons/bs";
 import { MdAutoGraph } from "react-icons/md";
 import { useParams } from "react-router-dom";
 import { fetchPerson, fetchPersonCredits } from "../api/api";
+import MovieList from "../components/Movie/MovieDetail/MovieList";
 
 interface Person {
   name: string;
@@ -47,14 +48,20 @@ const PersonInfo = () => {
     };
     data();
   }, []);
-  console.log(person);
+  const movie =
+    credits.cast &&
+    [...credits.cast]
+      .sort((b, a) => a.popularity - b.popularity)
+      .slice(0, 10)
+      .map((movie) => movie);
+
   return (
     <>
       <div className="section  ">
         <div className="banner w-full h-52 bg-[#c8c8c8] absolute z-[-1]"></div>
-        <div className="profile   flex w-full pt-[7rem] max-w-screen-2xl mx-auto">
-          <div className="box1 h-52    ">
-            <div className="dp w-52 h-52  rounded-full flex items-center justify-center overflow-hidden bg-slate-500">
+        <div className="block  2md:flex w-full pt-[7rem] max-w-screen-2xl mx-auto">
+          <div className="flex flex-col  items-center 2md:block     ">
+            <div className="min-h-36 min-w-36 h-36 w-36 2md:h-52 2md:w-52   rounded-full flex items-center justify-center overflow-hidden bg-slate-500">
               <img
                 src={"https://image.tmdb.org/t/p/w1280" + person?.profile_path}
                 className=" w-full h-full object-cover"
@@ -62,33 +69,37 @@ const PersonInfo = () => {
                 loading="lazy"
               />
             </div>
-            <button className="bg-[#616161] w-full mt-5 p-2 text-white text-lg flex justify-center items-center rounded-lg">
+            <button className="w-1/2 2md:w-full bg-[#616161]  h-9 mt-5 p-2 text-white text-lg flex justify-center items-center rounded-lg">
               <BsBookmark className="mr-2" />
               Follow
             </button>
           </div>
-          <div className="details h-full w-[80%] mt-24 text-[#a5a5a5] ml-10 ">
-            <h3 className="text-white font-semibold text-3xl mt-2">
+          <div className="px-2 3xs:px-6 lg:px-3 py-3 ml-0 mt-0 w-full  2md:text-start  2md:ml-10 2md:mt-24 2md:w-[80%] h-full   text-[#a5a5a5] ">
+            <h3 className="text-white font-semibold  mt-2 text-2xl 3xs:text-3xl">
               {person?.name}
             </h3>
 
-            <h4 className="text-[#fffffff0] font-semibold text-2xl mt-3 ">
-              Biography
-            </h4>
-            <div className="biography">
-              <p
-                className={`line-clamp-${
-                  isclamp ? "none" : "3"
-                } mt-2 leading-7 text-[1.1rem]	`}
-              >
-                {person?.biography}
-              </p>
-              <button onClick={unclamp} className="text-[#ffffff]">
-                {isclamp ? "Hide" : "Read more"}
-              </button>
-            </div>
+            {person && person?.biography && (
+              <>
+                <h4 className="text-[#fffffff0] font-semibold  mt-3 text-xl 3xs:text-xl ">
+                  Biography
+                </h4>
+                <div className="biography">
+                  <p
+                    className={`${
+                      isclamp ? "line-clamp-none" : "line-clamp-3"
+                    } mt-2   text-justify leading-0 text-[.9rem] 3xs:text-[1.1rem]  3xs:leading-7`}
+                  >
+                    {person?.biography}
+                  </p>
+                  <button onClick={unclamp} className="text-[#ffffff]">
+                    {isclamp ? "Hide" : "Read more"}
+                  </button>
+                </div>
+              </>
+            )}
 
-            <div className=" flex items-center mt-2 text-[#a5a5a5]">
+            <div className="text-[.9rem] 3xs:text-base flex flex-wrap truncate  mt-2 text-[#a5a5a5] w-full">
               <div className="bday flex">
                 <BsBalloon className="w-6 h-6 mr-1" />
                 Born {""}
@@ -108,11 +119,14 @@ const PersonInfo = () => {
           </div>
         </div>
       </div>
-      {/* <ul>
-        {credits.length > 0 && (
-          <li className="text-white">{credits[0].title}</li>
-        )}
-      </ul> */}
+      {movie && (
+        <section className="max-w-screen-2xl mx-auto px-5  1lg:px-10  2xl:px-0">
+          <h2 className="text-white text-3xl font-semibold my-6">
+            Popular Movies
+          </h2>
+          <MovieList movies={movie} />
+        </section>
+      )}
     </>
   );
 };

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { fetchDirectors } from "../../../api/api";
 import "swiper/css";
 import "swiper/css/navigation";
+import { Link } from "react-router-dom";
 interface Crew {
   id: number;
   name: string;
@@ -91,7 +92,9 @@ const Directors = ({ movieId }: { movieId: number }) => {
                       )}
                     </div>
                     <div className="castDetails font-normal whitespace-nowrap overflow-hidden text-ellipsis mt-2">
-                      <p className="font-semibold"> {directors.name}</p>
+                      <Link to={`/person/${directors?.id}`}>
+                        <p className="font-semibold"> {directors.name}</p>
+                      </Link>
                       <p className="text-[#ffffffc4]">{directors.character}</p>
                       <p className="text-[#ffffffc4]">{directors.job}</p>
                     </div>

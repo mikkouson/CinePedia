@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { fetchMovieCredits } from "../../../api/api";
 import "swiper/css";
 import "swiper/css/navigation";
+import { Link } from "react-router-dom";
 
 const Cast = ({ movieId }: { movieId: number }) => {
   interface Cast {
@@ -86,7 +87,9 @@ const Cast = ({ movieId }: { movieId: number }) => {
                       )}
                     </div>
                     <div className=" castDetails font-normal whitespace-nowrap overflow-hidden text-ellipsis mt-2 pr-6 py-3 ">
-                      <p className="font-semibold"> {casts.name}</p>
+                      <Link to={`/person/${casts?.id}`}>
+                        <p className="font-semibold"> {casts.name}</p>{" "}
+                      </Link>
                       <p className="text-[#ffffffc4]  whitespace-nowrap overflow-hidden text-ellipsis">
                         {casts.character}
                       </p>

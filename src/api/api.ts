@@ -122,3 +122,4 @@ export const fetchPersonCredits = async (id: number) => {
   const { data } = response;
   return data;
 };
+  
