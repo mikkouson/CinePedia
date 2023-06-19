@@ -23,12 +23,6 @@ interface MovieProps {
   genres: Genre[];
 }
 
-// convert time function
-function convertTime(time: number) {
-  const hours = Math.floor(time / 60);
-  const minutes = time % 60;
-  return `${hours}h ${minutes}m`;
-}
 const Header = ({ movieId, movie }: { movieId: number; movie: MovieProps }) => {
   const [activeSlidePath, setActiveSlidePath] = useState<string>("");
 
@@ -48,7 +42,7 @@ const Header = ({ movieId, movie }: { movieId: number; movie: MovieProps }) => {
           style={{ backgroundImage: `url(${posterUrl})` }}
         >
           <div className=" flex justify-center my-10 z-[100]">
-            <div className="w-[30%] ">
+            <div className="w-[30%] mt-10 ">
               <Logo movieId={movieId} />
             </div>
           </div>
@@ -98,7 +92,6 @@ const Header = ({ movieId, movie }: { movieId: number; movie: MovieProps }) => {
               </div>
 
               {/* Get movie Trailer */}
-
               <p className="text-[.9rem] lg:text-lg text-[#ffffffa5] font-normal mt-[.5rem] text-justify">
                 {movie.overview}
               </p>

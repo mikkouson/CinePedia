@@ -16,7 +16,6 @@ interface MovieProps {
   runtime: number;
   original_language: string;
   status: string;
-
   belongs_to_collection: {
     id: number;
   };

@@ -10,6 +10,7 @@ const TopRated = () => {
     };
     data();
   }, []);
+
   return (
     <>
       {topRated && (

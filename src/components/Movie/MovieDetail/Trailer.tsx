@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { fetchTrailer } from "../../../api/api";
 
 const Trailer = ({ movieId }: { movieId: number }) => {

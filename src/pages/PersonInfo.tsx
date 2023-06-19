@@ -13,11 +13,18 @@ interface Person {
   known_for_department: string;
   popularity: number;
 }
+
+interface Credits {
+  cast: {
+    popularity: number;
+  }[];
+}
+
 const PersonInfo = () => {
   const { id } = useParams();
 
   const [person, setPerson] = useState<Person | null>(null);
-  const [credits, setCredits] = useState([]);
+  const [credits, setCredits] = useState<Credits>({ cast: [] });
   const [formattedDate, setFormattedDate] = useState("");
   const [isclamp, setClamp] = useState(false);
 

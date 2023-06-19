@@ -1,4 +1,3 @@
-// MovieContainer.tsx
 import Movie from "./Movie";
 
 export interface Movie {
@@ -12,17 +11,11 @@ export interface Movie {
   status: string;
 }
 
-type HandleOpenModal = (movie: Movie) => void;
-
 interface MovieContainerProps {
   movies: Movie[];
-  handleOpenModal?: HandleOpenModal;
 }
 
-const MovieContainer = ({
-  movies = [],
-  handleOpenModal = () => {},
-}: MovieContainerProps) => {
+const MovieContainer = ({ movies = [] }: MovieContainerProps) => {
   return (
     <div className="grid gap-2 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 md p-2">
       {movies.map((movie) => (

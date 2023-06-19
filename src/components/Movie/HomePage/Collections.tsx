@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { Autoplay, Mousewheel, Pagination } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { fetchMovie } from "../../../api/api";
 import Collection from "../MovieDetail/Collection";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, Mousewheel } from "swiper";
 import "swiper/css/pagination";
-
 import "swiper/css";
 
 interface Movie {

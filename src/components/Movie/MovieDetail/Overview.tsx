@@ -12,6 +12,7 @@ interface MovieProps {
     release_date: string;
     status: string;
   };
+
   genres: {
     id: number;
     name: string;

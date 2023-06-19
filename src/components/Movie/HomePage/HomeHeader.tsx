@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Autoplay, Pagination, Thumbs } from "swiper";
-import "swiper/css";
-import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Overview from "../MovieDetail/Overview";
 import { Movie } from "../../MovieContainer";
+import "swiper/css";
+import "swiper/css/navigation";
 import "swiper/css/pagination";
+
 interface HomeProps {
   movies: Movie[];
 }

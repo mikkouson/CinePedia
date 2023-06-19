@@ -50,7 +50,7 @@ const Backdrops = ({
             spaceBetween={0}
             grabCursor={true}
             autoplay={{
-              delay: 10000,
+              delay: 7000,
               disableOnInteraction: false,
             }}
             thumbs={{

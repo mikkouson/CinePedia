@@ -40,27 +40,31 @@ const PeopleList = ({ people }: any) => {
         people.map((person: any) => (
           <SwiperSlide key={person.id}>
             <div className="movieContainer ml-2">
-              <div className="box  h-[10rem] xs:h-[15rem]  1lg:h-72 w-full  flex flex-col items-center">
-                {person.profile_path ? (
-                  <>
+              <Link to={`/person/${person?.id}`}>
+                <div className="box  h-[10rem] xs:h-[15rem]  1lg:h-72 w-full  flex flex-col items-center">
+                  {person.profile_path ? (
+                    <>
+                      <img
+                        src={
+                          "https://image.tmdb.org/t/p/w1280" +
+                          person.profile_path
+                        }
+                        className=" h-full object-cover rounded-xl"
+                        alt="Profile N/A"
+                        loading="lazy"
+                      />
+                    </>
+                  ) : (
                     <img
-                      src={
-                        "https://image.tmdb.org/t/p/w1280" + person.profile_path
-                      }
+                      src="https://placehold.co/250x400/000000/000000f1?text=N/A"
                       className=" h-full object-cover rounded-xl"
-                      alt="Profile N/A"
                       loading="lazy"
+                      alt="Profile N/A"
                     />
-                  </>
-                ) : (
-                  <img
-                    src="https://placehold.co/250x400/000000/000000f1?text=N/A"
-                    className=" h-full object-cover rounded-xl"
-                    loading="lazy"
-                    alt="Profile N/A"
-                  />
-                )}
-              </div>
+                  )}
+                </div>
+              </Link>
+
               <div className="px-2 3xs:px-6 lg:px-3 py-3">
                 <div className="text-gray-600 truncate font-bold hover:text-stone-900 cursor-pointer z-[100]">
                   <Link to={`/person/${person?.id}`}>

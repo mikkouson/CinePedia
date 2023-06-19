@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import "swiper/css";
-import "swiper/css/navigation";
 import { fetchSimilar } from "../../../api/api";
 import MovieList from "./MovieList";
+import "swiper/css";
+import "swiper/css/navigation";
 
 const Similar = ({ movieId }: { movieId: number }) => {
   const [similarMovies, setSimilarMovies] = useState({ results: [] });

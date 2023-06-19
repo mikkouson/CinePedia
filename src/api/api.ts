@@ -39,10 +39,10 @@ export const fetchTopRated = async () => {
   return data.results;
 };
 
-export const fetchsearch = async () => {
-  const response = await api.get(`/search/movie`);
+export const fetchsearch = async (query:string) => {
+  const response = await api.get(`/search/movie?query=${query}`);
   const { data } = response;
-  return data.query;
+  return data.results;
 };
 
 export const fetchMovieCredits = async (id: number) => {
