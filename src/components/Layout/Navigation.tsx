@@ -9,7 +9,7 @@ function Navigation() {
   async function handleSubmit(e: { preventDefault: () => void }) {
     e.preventDefault();
     if (query && query !== "") {
-      navigate(`movies/${query}`);
+      navigate(`movies/${query}/1`);
     }
   }
 

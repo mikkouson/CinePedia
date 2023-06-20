@@ -1,22 +1,60 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import MovieContainer from "./MovieContainer";
-import { fetchsearch } from "../api/api";
+import { fetchSearch } from "../api/api";
 
 const SearchMovie = () => {
-  const { query } = useParams();
+  const { query = "", page } = useParams<{ query?: string; page: string }>();
+
   const [movies, setMovies] = useState([]);
+  const [currentPage, setCurrentPage] = useState(Number(page));
+  const navigate = useNavigate();
+  console.log(movies);
 
   useEffect(() => {
-    const data = async () => {
-      setMovies(await fetchsearch(String(query)));
+    setCurrentPage(Number(page));
+  }, [page]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const results = await fetchSearch(query, currentPage);
+      setMovies(results);
     };
-    data();
-  }, [query]);
+    fetchData();
+  }, [query, currentPage]);
+
+  useEffect(() => {
+    const pageNumber = Number(page);
+    if (pageNumber && pageNumber !== currentPage) {
+      setCurrentPage(pageNumber);
+    }
+  }, [page, currentPage]);
+
+  const goToNextPage = () => {
+    const nextPage = currentPage + 1;
+    setCurrentPage(nextPage);
+    navigate(`/movies/${query}/${nextPage}`);
+  };
+
+  const goBack = () => {
+    const prevPage = currentPage - 1;
+    setCurrentPage(prevPage);
+    navigate(`/movies/${query}/${prevPage}`);
+  };
 
   return (
     <div className="max-w-screen-2xl mx-auto">
       <MovieContainer movies={movies} />
+      <p className="text-white mt-10">{currentPage}</p>
+
+      <button className="text-white" onClick={goToNextPage}>
+        Next Page
+      </button>
+      {currentPage > 1 && (
+        <button className="text-white" onClick={goBack}>
+          Back
+        </button>
+      )}
     </div>
   );
 };

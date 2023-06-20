@@ -24,7 +24,8 @@ function App() {
             }
           />
 
-          <Route path="/movies/:query" element={<SearchMovie />}></Route>
+          <Route path="/movies/:query/:page" element={<SearchMovie />} />
+
           <Route path="/movie/:id" element={<MovieInfo />}></Route>
           <Route path="/person/:id" element={<PersonInfo />}></Route>
         </Routes>

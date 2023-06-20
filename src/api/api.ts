@@ -39,8 +39,8 @@ export const fetchTopRated = async () => {
   return data.results;
 };
 
-export const fetchsearch = async (query:string) => {
-  const response = await api.get(`/search/movie?query=${query}`);
+export const fetchSearch = async (query: string , page: number) => {
+  const response = await api.get(`/search/movie?query=${query}&page=${page}`);
   const { data } = response;
   return data.results;
 };
