@@ -39,10 +39,13 @@ export const fetchTopRated = async () => {
   return data.results;
 };
 
-export const fetchSearch = async (query: string , page: number) => {
+export const fetchSearch = async (query: string, page: number = 1) => {
   const response = await api.get(`/search/movie?query=${query}&page=${page}`);
   const { data } = response;
-  return data.results;
+  return{
+    results: data.results,
+    total: data.total_pages
+  };
 };
 
 export const fetchMovieCredits = async (id: number) => {
@@ -123,3 +126,12 @@ export const fetchPersonCredits = async (id: number) => {
   return data;
 };
   
+export const fetchGenreMovieList = async (id: number) => {
+  const response = await api.get(`/discover/movie`, {
+    params: {
+      with_genres:` ${id}`
+    }
+  });
+  const { data } = response;
+  return data;
+};

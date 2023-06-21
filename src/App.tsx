@@ -6,6 +6,7 @@ import PersonInfo from "./pages/PersonInfo";
 import Navigation from "./components/Layout/Navigation";
 import Home from "./pages/Home";
 import "./App.css";
+import Genre from "./components/Movie/MovieDetail/Genre";
 
 function App() {
   const movies = useFetch();
@@ -24,8 +25,8 @@ function App() {
             }
           />
 
-          <Route path="/movies/:query/:page" element={<SearchMovie />} />
-
+          <Route path="/movies/:query?/:page?" element={<SearchMovie />} />
+          <Route path="/:genre/:id" element={<Genre />} />
           <Route path="/movie/:id" element={<MovieInfo />}></Route>
           <Route path="/person/:id" element={<PersonInfo />}></Route>
         </Routes>

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { fetchMovie } from "../../../api/api";
 import MovieDetailsBtn from "../../Buttons/MovieDetailsBtn";
 import Logo from "./Logo";
-
 interface MovieProps {
   status: string;
   movieId: number;
@@ -32,7 +32,12 @@ const Overview = ({
   show,
 }: MovieProps & { show?: boolean }) => {
   const [movieSpecifics, setMovieSpecifics] = useState<MovieProps>();
+  const navigate = useNavigate();
 
+  function handleGenreClick(genre: { id: any }) {
+    console.log(genre.id);
+    navigate(`/genre/${genre.id}`);
+  }
   useEffect(() => {
     const fetchData = async () => {
       setMovieSpecifics(await fetchMovie(Number(movieId)));
@@ -65,6 +70,7 @@ const Overview = ({
                 <a
                   className="cursor-pointer text-[#ffffff] bg-[#ffffff11] rounded-xl px-4 py-1 mt-1 mr-2 hover:bg-[#ffffff1f]"
                   key={genre.id}
+                  onClick={() => handleGenreClick(genre)}
                 >
                   {genre.name}
                 </a>
