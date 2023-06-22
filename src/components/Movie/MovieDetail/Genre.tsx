@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { fetchGenreMovieList } from "../../../api/api";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { fetchGenreMovieList } from "../../../api/api";
+import MovieContainer from "../../MovieContainer";
 
 const Genre = () => {
   const { id } = useParams();
-  const [genreMovieList, setGenreMovieList] = useState([]);
+  const [genreMovieList, setGenreMovieList] = useState({ results: [] });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,9 +17,15 @@ const Genre = () => {
   console.log(genreMovieList);
 
   return (
-    <div className="text-white pt-10">
-      {/* {genreMovieList.length > 0 && genreMovieList.map((res) => res.id)} */}
-    </div>
+    <>
+      {genreMovieList && genreMovieList.results.length > 0 && (
+        <section className="px-5  1lg:px-10  2xl:px-0 relative movieDetails max-w-screen-2xl mx-auto">
+          <div className="Cast my-5 w-full">
+            <MovieContainer movies={genreMovieList.results || []} />
+          </div>
+        </section>
+      )}
+    </>
   );
 };
 
