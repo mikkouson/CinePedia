@@ -7,6 +7,7 @@ import Navigation from "./components/Layout/Navigation";
 import Home from "./pages/Home";
 import "./App.css";
 import Genre from "./components/Movie/MovieDetail/Genre";
+import Footer from "./components/Layout/Footer";
 
 function App() {
   const movies = useFetch();
@@ -30,6 +31,7 @@ function App() {
           <Route path="/movie/:id" element={<MovieInfo />}></Route>
           <Route path="/person/:id" element={<PersonInfo />}></Route>
         </Routes>
+        <Footer />
       </Router>
     </div>
   );
