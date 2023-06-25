@@ -63,18 +63,29 @@ const PersonInfo = () => {
       .map((movie) => movie);
 
   return (
-    <>
-      <div className="section  ">
+    <section className="min-h-[100vh]">
+      <div>
         <div className="banner w-full h-52 bg-[#c8c8c8] absolute z-[-1]"></div>
         <div className="block  2md:flex w-full pt-[7rem] max-w-screen-2xl mx-auto">
           <div className="flex flex-col  items-center 2md:block     ">
-            <div className="min-h-36 min-w-36 h-36 w-36 2md:h-52 2md:w-52   rounded-full flex items-center justify-center overflow-hidden bg-slate-500">
-              <img
-                src={"https://image.tmdb.org/t/p/w1280" + person?.profile_path}
-                className=" w-full h-full object-cover"
-                alt="Profile N/A"
-                loading="lazy"
-              />
+            <div className="min-h-36 min-w-36 h-36 w-36 2md:h-52 2md:w-52   rounded-full flex items-center justify-center overflow-hidden">
+              {person?.profile_path ? (
+                <img
+                  src={
+                    "https://image.tmdb.org/t/p/w1280" + person?.profile_path
+                  }
+                  className=" w-full h-full object-cover"
+                  alt="Profile N/A"
+                  loading="lazy"
+                />
+              ) : (
+                <img
+                  src="https://placehold.co/250x400/000000/000000f1?text=N/A"
+                  className=" h-full w-full object-cover rounded-xl"
+                  loading="lazy"
+                  alt="Profile N/A"
+                />
+              )}
             </div>
             <button className="w-1/2 2md:w-full bg-[#616161]  h-9 mt-5 p-2 text-white text-lg flex justify-center items-center rounded-lg">
               <BsBookmark className="mr-2" />
@@ -134,7 +145,7 @@ const PersonInfo = () => {
           <MovieList movies={movie} />
         </section>
       )}
-    </>
+    </section>
   );
 };
 
