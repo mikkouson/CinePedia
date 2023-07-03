@@ -1,6 +1,6 @@
 # Cinepedia - Movie App
 
-Cinepedia is a movie application built using React, TypeScript, and the TMDB API. It allows users to discover information about movies, search for specific titles, and view details such as ratings, release dates, and cast members.
+Cinepedia is a movie application built using React, TypeScript, Tailwind CSS, and the TMDB API. It allows users to discover information about movies, search for specific titles, and view details such as ratings, release dates, and cast members.
 
 ## Features
 
@@ -50,8 +50,7 @@ Cinepedia is a movie application built using React, TypeScript, and the TMDB API
 You can customize certain aspects of the app by modifying the following files:
 
 - **`src/config.ts`**: Contains the configuration options for the TMDB API, such as base URL and endpoints.
-- **`src/constants.ts`**: Defines constants used throughout the app, such as routes and default values.
-- **`src/styles`**: Contains the styling files for the app. You can modify the CSS or add additional styles as needed.
+- **`src/styles`**: Contains the styling files for the app. You can modify the Tailwind CSS or add additional styles as needed.
 
 ## Dependencies
 
@@ -62,7 +61,7 @@ Cinepedia relies on the following dependencies:
 - React Router: Routing library for navigation.
 - Axios: Promise-based HTTP client for making API requests.
 - React Icons: Icon library for using popular icon sets.
-- Styled Components: CSS-in-JS library for styling components.
+- Tailwind CSS: Utility-first CSS framework.
 - Swiper: Library for creating touch-enabled carousels and sliders.
 - Vite: Fast development server and build tool for modern web applications.
 
@@ -76,10 +75,7 @@ Cinepedia makes use of the following resources:
 - [React Router](https://reactrouter.com/): Declarative routing for React.
 - [Axios](https://axios-http.com/): Promise-based HTTP client for making API requests.
 - [React Icons](https://react-icons.github.io/react-icons/): Icon library for React.
-- [Styled Components](https://styled-components.com/): CSS-in-JS library for styling components.
+- [Tailwind CSS](https://tailwindcss.com/): Utility-first CSS framework.
 - [Swiper](https://swiperjs.com/): Touch-enabled library for creating carousels and sliders.
 - [Vite](https://vitejs.dev/): Fast development server and build tool for modern web applications.
 
-
-
-Feel free to customize and modify this readme to fit your project's specific requirements. Enjoy building your Cinepedia movie app with React, TypeScript, the TMDB API, and Vite!
