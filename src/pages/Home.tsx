@@ -22,7 +22,13 @@ const Home = ({ movies }: HomeProps) => {
   return (
     <>
       <main>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense
+          fallback={
+            <div className="text-white min-h[100vh] h-[100vh] flex items-center justify-center">
+              Loading...
+            </div>
+          }
+        >
           <Headers movies={movies} />
           <PopularMovie movies={movies} />
           <TopRated />
