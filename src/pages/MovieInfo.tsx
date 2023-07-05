@@ -29,7 +29,13 @@ const MovieInfo = () => {
 
   return (
     <main className="text-white">
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense
+        fallback={
+          <div className="text-white min-h[100vh] h-[100vh] flex items-center justify-center">
+            Loading...
+          </div>
+        }
+      >
         <Header movieId={Number(id)} movie={movie} />
         <Cast movieId={Number(id)} />
         <Directors movieId={Number(id)} />
