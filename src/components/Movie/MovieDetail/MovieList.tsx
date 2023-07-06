@@ -15,6 +15,13 @@ interface MovieProps {
 }
 
 const MovieList = ({ movies }: { movies: MovieProps[] }) => {
+  const handleLinkClick = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <Swiper
       spaceBetween={0}
@@ -50,7 +57,7 @@ const MovieList = ({ movies }: { movies: MovieProps[] }) => {
         movies.map((result) => (
           <SwiperSlide key={result.id}>
             <div className="movieContainer ml-2">
-              <Link to={`/movie/${result?.id}`}>
+              <Link to={`/movie/${result?.id}`} onClick={handleLinkClick}>
                 <div className=" box  xs:h-[15rem]  1lg:h-72 w-full  flex flex-col items-center">
                   {result.poster_path ? (
                     <>
@@ -76,7 +83,7 @@ const MovieList = ({ movies }: { movies: MovieProps[] }) => {
               </Link>
               <div className="px-2 3xs:px-6 lg:px-3 py-3">
                 <div className="text-gray-600 truncate font-bold hover:text-stone-900 cursor-pointer z-[100]">
-                  <Link to={`/movie/${result?.id}`}>
+                  <Link to={`/movie/${result?.id}`} onClick={handleLinkClick}>
                     <h4 className="Title whitespace-nowrap overflow-hidden text-ellipsis text-white">
                       {result.title}
                     </h4>
